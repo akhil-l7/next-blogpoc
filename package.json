@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run removeCache && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "removeCache": "npx rimraf .next"
   },
   "dependencies": {
     "@prismicio/client": "^7.21.0",
