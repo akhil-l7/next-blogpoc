@@ -1,4 +1,5 @@
 import client from "@/lib/prismic";
+import Link from "next/link";
 
 export default async function Home() {
   const data = await client.getAllByType('blog');
@@ -12,11 +13,11 @@ export default async function Home() {
           {
             data?.map(({ data, id }) => (
               <article key={id} className="overflow-hidden group relative py-2 pl-1 drop-shadow-2xl h-20 sm:h-32 shadow-[5px_5px_10px_2px_rgba(255,255,255,0.02)] hover:shadow-[10px_10px_10px_2px_rgba(255,255,255,0.05)] transition-shadow border border-r-transparent border-b-transparent border-[#f1f1f120] hover:border-[#f1f1f130] rounded-bl-2xl">
-                <a href={`/${id}`}>
+                <Link href={`/${id}`}>
                   <header className="flex justify-between items-center px-2">
                     <h2 className="text-2xl lg:text-3xl">{data?.title}</h2>
                   </header>
-                </a>
+                </Link>
               </article>
             ))
           }
