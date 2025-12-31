@@ -1,6 +1,9 @@
 name: Deploy Next Pages
 
 on:
+  # Runs on webhook
+  repository_dispatch:
+    types: [prismic-update]
   # Runs on pushes targeting the default branch
   push:
     branches: ["master"]
