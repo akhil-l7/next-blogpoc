@@ -89,6 +89,22 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Check if triggered by repository_dispatch
+        id: check_trigger
+        run: |
+          if [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
+            echo "Workflow triggered by webhook"
+            echo "title=Triggered by webhook" >> $GITHUB_ENV
+          elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "Workflow triggered manually"
+            echo "title=Triggered manually" >> $GITHUB_ENV1
+          else
+            echo "Workflow triggered by repo push"
+            echo "title=Triggered by push event" >> $GITHUB_ENV
+          fi
+      - name: Use dynamic title
+        run: |
+          echo "${{ env.title }}"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
