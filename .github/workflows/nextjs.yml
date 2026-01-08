@@ -97,7 +97,7 @@ jobs:
             echo "title=Triggered by webhook" >> $GITHUB_ENV
           elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             echo "Workflow triggered manually"
-            echo "title=Triggered manually" >> $GITHUB_ENV1
+            echo "title=Triggered manually" >> $GITHUB_ENV
           else
             echo "Workflow triggered by repo push"
             echo "title=Triggered by push event" >> $GITHUB_ENV
