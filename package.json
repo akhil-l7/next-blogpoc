@@ -12,6 +12,7 @@
   "dependencies": {
     "@prismicio/client": "^7.21.0",
     "@prismicio/helpers": "^2.3.9",
+    "@radix-ui/react-separator": "^1.1.8",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.562.0",
