@@ -1,28 +1,33 @@
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import client from "@/lib/prismic";
 import Link from "next/link";
 
 export default async function Home() {
   const data = await client.getAllByType('blog');
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black px-2">
-      <main className="min-h-screen w-full max-w-3xl bg-white dark:bg-black py-4">
-        <header className="mb-6">
-          <h1 className="text-4xl lg:text-5xl">Blog</h1>
-        </header>
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 cursor-crosshair">
+    <main className="max-w-7xl px-2 mx-auto">
+      <header className="my-10">
+        <h1 className="scroll-m-20 text-center text-4xl tracking-tight text-balance">POC Blog</h1>
+      </header>
+      <Separator className="mb-6" />
+      <section className="">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {
             data?.map(({ data, id }) => (
-              <article key={id} className="overflow-hidden group relative py-2 pl-1 drop-shadow-2xl h-20 sm:h-32 shadow-[5px_5px_10px_2px_rgba(255,255,255,0.02)] hover:shadow-[10px_10px_10px_2px_rgba(255,255,255,0.05)] transition-shadow border border-r-transparent border-b-transparent border-[#f1f1f120] hover:border-[#f1f1f130] rounded-bl-2xl">
+              <Card key={id}>
                 <Link href={`/${id}`}>
-                  <header className="flex justify-between items-center px-2">
-                    <h2 className="text-2xl lg:text-3xl">{data?.title}</h2>
-                  </header>
+                  <CardHeader>
+                    <CardTitle>
+                      {data?.title}
+                    </CardTitle>
+                  </CardHeader>
                 </Link>
-              </article>
+              </Card>
             ))
           }
-        </section>
-      </main>
-    </div>
+        </div>
+      </section>
+    </main>
   );
 }
