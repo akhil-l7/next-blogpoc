@@ -1,4 +1,6 @@
 import client from "@/lib/prismic";
+import { ChevronLeftIcon } from "lucide-react";
+import Link from "next/link";
 import { Suspense } from "react";
 
 export async function generateStaticParams() {
@@ -11,12 +13,17 @@ export default async function blog({ params }: { params: Promise<{ slug: string 
   const data = await params;
   const post = await client.getByID(data?.slug);
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+    <div className="flex-1 container mx-auto mt-8">
+      <div className="flex items-center">
+        <Link href={`/`} className="mr-4">
+          <ChevronLeftIcon />
+        </Link>
         <Suspense fallback="loading...">
-          <h1>{post.data.title}</h1>
+          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance">
+            {post?.data?.title || 'Title'}
+          </h1>
         </Suspense>
-      </main>
+      </div>
     </div>
   );
 }
