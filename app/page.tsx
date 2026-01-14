@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import client from "@/lib/prismic";
-import { ChevronRightIcon } from "lucide-react";
+import { PrismicRichText } from "@prismicio/react";
 import Link from "next/link";
 
 export default async function Home() {
@@ -24,7 +24,7 @@ export default async function Home() {
                     {data?.title || 'Title'}
                   </CardTitle>
                   <CardDescription>
-                    {data?.description || 'Description'}
+                    {data.excerpt || 'excerpt'}
                   </CardDescription>
                   <CardAction>
                     <Link href={`/${id}`}>
@@ -33,7 +33,7 @@ export default async function Home() {
                   </CardAction>
                 </CardHeader>
                 <CardContent>
-                  {data?.description || 'Content'}
+                  <PrismicRichText field={data.content} />
                 </CardContent>
               </Card>
             ))
