@@ -8,16 +8,16 @@ import Link from "next/link";
 export default async function Home() {
   const data = await client.getAllByType('blog');
   return (
-    <main className="container px-2 mx-auto">
+    <main className="container max-w-5xl px-2 mx-auto">
       <header className="my-10">
         <h1 className="scroll-m-20 text-center text-4xl tracking-tight text-balance">{config?.title || 'blog'}</h1>
       </header>
       <Separator className="mb-6" />
       <section>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div className="grid xl:grid-cols-2 gap-8">
           {
             data?.map(({ data, id }) => (
-              <Card key={id}>
+              <Card key={id} className="space-y-12">
                 <CardHeader>
                   <CardTitle>
                     {data?.title || 'Title'}
