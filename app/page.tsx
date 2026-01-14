@@ -1,4 +1,5 @@
 import { config } from "@/app.config";
+import { Button } from "@/components/ui/button";
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import client from "@/lib/prismic";
@@ -27,7 +28,7 @@ export default async function Home() {
                   </CardDescription>
                   <CardAction>
                     <Link href={`/${id}`}>
-                      <ChevronRightIcon />
+                      <Button variant={"outline"}>Read More</Button>
                     </Link>
                   </CardAction>
                 </CardHeader>
