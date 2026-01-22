@@ -1,13 +1,15 @@
 import { config } from "@/app.config";
-import { Button } from "@/components/ui/button";
-import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import client from "@/lib/prismic";
-import { PrismicRichText } from "@prismicio/react";
+import { Clock } from "lucide-react";
 import Link from "next/link";
 
 export default async function Home() {
   const data = await client.getAllByType('blog');
+  const PlaceholderDate = '2026-10-28';
+  const badgePlaceholder = 'General'
   return (
     <main className="container max-w-5xl px-2 mx-auto">
       <header className="my-10">
@@ -20,21 +22,25 @@ export default async function Home() {
             data?.map(({ data, id }) => (
               <Card key={id} className="space-y-12">
                 <CardHeader>
+                  <div className="flex gap-2">
+                    <Badge>{badgePlaceholder}</Badge>
+                    <p className="text-muted-foreground text-sm">{data.published_date || PlaceholderDate}</p>
+                    <div className="flex text-muted-foreground">
+                      <Clock size={16} className="mt-0.5" />
+                      <p className="text-muted-foreground text-sm">&lt;{10} Min Read</p>
+                    </div>
+                  </div>
                   <CardTitle>
-                    {data?.title || 'Title'}
+                    <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+                      <Link href={`/${id}`}>{data?.title || 'Title'}</Link>
+                    </h2>
                   </CardTitle>
                   <CardDescription>
-                    {data.excerpt || 'excerpt'}
+                    <p className="text-muted-foreground text-xl">
+                      {data.excerpt || 'excerpt'}
+                    </p>
                   </CardDescription>
-                  <CardAction>
-                    <Link href={`/${id}`}>
-                      <Button variant={"outline"}>Read More</Button>
-                    </Link>
-                  </CardAction>
                 </CardHeader>
-                <CardContent>
-                  <PrismicRichText field={data.content} />
-                </CardContent>
               </Card>
             ))
           }
