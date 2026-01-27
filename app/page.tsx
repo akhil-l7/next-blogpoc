@@ -24,24 +24,22 @@ export default async function Home() {
               <Item key={id} variant={"outline"}>
                 <ItemContent>
                   <ItemTitle>
-                    <div className="flex gap-2">
-                      <Badge>{badgePlaceholder}</Badge>
-                      <p className="text-muted-foreground text-sm">{data.published_date || PlaceholderDate}</p>
-                      <div className="flex text-muted-foreground">
-                        <Clock size={16} className="mt-0.5 mr-0.5" />
-                        <p className="text-muted-foreground text-sm">&lt;{10} Min Read</p>
+                    <div className="flex flex-col">
+                      <div className="flex gap-2">
+                        <Badge>{badgePlaceholder}</Badge>
+                        <p className="text-muted-foreground text-sm">{data.published_date || PlaceholderDate}</p>
+                        <div className="flex text-muted-foreground">
+                          <Clock size={16} className="mt-0.5 mr-0.5" />
+                          <p className="text-muted-foreground text-sm">&lt;{10} Min Read</p>
+                        </div>
                       </div>
+                      <h2 className="scroll-m-20 text-4xl font-semibold tracking-tight first:mt-0">
+                        <Link href={`/${id}`}>{data?.title || 'Title'}</Link>
+                      </h2>
                     </div>
                   </ItemTitle>
-                  <ItemTitle>
-                    <h2 className="scroll-m-20 text-4xl font-semibold tracking-tight first:mt-0">
-                      <Link href={`/${id}`}>{data?.title || 'Title'}</Link>
-                    </h2>
-                  </ItemTitle>
                   <ItemDescription>
-                    <p className="text-muted-foreground text-xl">
-                      {data.excerpt || 'excerpt'}
-                    </p>
+                    {data.excerpt || 'excerpt'}
                   </ItemDescription>
                 </ItemContent>
               </Item>
