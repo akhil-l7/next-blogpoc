@@ -1,6 +1,7 @@
 import { config } from "@/app.config";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Item, ItemContent, ItemDescription, ItemHeader, ItemTitle } from "@/components/ui/item";
 import { Separator } from "@/components/ui/separator";
 import client from "@/lib/prismic";
 import { Clock } from "lucide-react";
@@ -20,28 +21,30 @@ export default async function Home() {
         <div className="grid xl:grid-cols-2 gap-8">
           {
             data?.map(({ data, id }) => (
-              <Card key={id} className="space-y-12">
-                <CardHeader>
-                  <div className="flex gap-2">
-                    <Badge>{badgePlaceholder}</Badge>
-                    <p className="text-muted-foreground text-sm">{data.published_date || PlaceholderDate}</p>
-                    <div className="flex text-muted-foreground">
-                      <Clock size={16} className="mt-0.5" />
-                      <p className="text-muted-foreground text-sm">&lt;{10} Min Read</p>
+              <Item key={id} variant={"outline"}>
+                <ItemContent>
+                  <ItemTitle>
+                    <div className="flex gap-2">
+                      <Badge>{badgePlaceholder}</Badge>
+                      <p className="text-muted-foreground text-sm">{data.published_date || PlaceholderDate}</p>
+                      <div className="flex text-muted-foreground">
+                        <Clock size={16} className="mt-0.5 mr-0.5" />
+                        <p className="text-muted-foreground text-sm">&lt;{10} Min Read</p>
+                      </div>
                     </div>
-                  </div>
-                  <CardTitle>
-                    <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+                  </ItemTitle>
+                  <ItemTitle>
+                    <h2 className="scroll-m-20 text-4xl font-semibold tracking-tight first:mt-0">
                       <Link href={`/${id}`}>{data?.title || 'Title'}</Link>
                     </h2>
-                  </CardTitle>
-                  <CardDescription>
+                  </ItemTitle>
+                  <ItemDescription>
                     <p className="text-muted-foreground text-xl">
                       {data.excerpt || 'excerpt'}
                     </p>
-                  </CardDescription>
-                </CardHeader>
-              </Card>
+                  </ItemDescription>
+                </ItemContent>
+              </Item>
             ))
           }
         </div>
