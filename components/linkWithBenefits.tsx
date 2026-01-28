@@ -14,13 +14,13 @@ export default function LinkWithBenefits({ children, href, ...props }: LinkWithB
 
     async function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
         event.preventDefault();
-        const bodyTag = document.body;
-        if (!bodyTag) return null;
-        bodyTag.classList.add('transition-main');
+        const mainTag = document.querySelector('.content_container');
+        if (!mainTag) return null;
+        mainTag.classList.add('transition-main');
         await sleep(1000);
         router.push(href);
         await sleep(1000);
-        bodyTag.classList.remove('transition-main');
+        mainTag.classList.remove('transition-main');
     }
 
     return (
