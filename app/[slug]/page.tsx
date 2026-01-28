@@ -1,6 +1,6 @@
+import LinkWithBenefits from "@/components/linkWithBenefits";
 import client from "@/lib/prismic";
 import { ChevronLeftIcon } from "lucide-react";
-import Link from "next/link";
 import { Suspense } from "react";
 
 export async function generateStaticParams() {
@@ -15,9 +15,9 @@ export default async function blog({ params }: { params: Promise<{ slug: string 
   return (
     <div className="flex-1 container mx-auto mt-8">
       <div className="flex items-center">
-        <Link href={`/`} className="mr-4">
-          <ChevronLeftIcon />
-        </Link>
+        <LinkWithBenefits href={`/`}>
+          <ChevronLeftIcon className="mr-4" />
+        </LinkWithBenefits>
         <Suspense fallback="loading...">
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance">
             {post?.data?.title || 'Title'}

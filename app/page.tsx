@@ -1,11 +1,10 @@
 import { config } from "@/app.config";
+import LinkWithBenefits from "@/components/linkWithBenefits";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Item, ItemContent, ItemDescription, ItemHeader, ItemTitle } from "@/components/ui/item";
+import { Item, ItemContent, ItemDescription, ItemTitle } from "@/components/ui/item";
 import { Separator } from "@/components/ui/separator";
 import client from "@/lib/prismic";
 import { Clock } from "lucide-react";
-import Link from "next/link";
 
 export default async function Home() {
   const data = await client.getAllByType('blog');
@@ -34,7 +33,7 @@ export default async function Home() {
                         </div>
                       </div>
                       <h2 className="scroll-m-20 text-4xl font-semibold tracking-tight first:mt-0">
-                        <Link href={`/${id}`}>{data?.title || 'Title'}</Link>
+                        <LinkWithBenefits href={`/${id}`}>{data?.title || 'Title'}</LinkWithBenefits>
                       </h2>
                     </div>
                   </ItemTitle>
