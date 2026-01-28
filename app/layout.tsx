@@ -1,7 +1,8 @@
+import { config } from "@/app.config";
+import { Separator } from "@/components/ui/separator";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { config } from "@/app.config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,7 +46,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <header className="my-10">
+          <h1 className="scroll-m-20 text-center text-4xl tracking-tight text-balance">{config?.title || 'blog'}</h1>
+        </header>
+        <Separator className="mb-6" />
+        <main className="container max-w-5xl px-2 mx-auto">
+          {children}
+        </main>
       </body>
     </html>
   );
