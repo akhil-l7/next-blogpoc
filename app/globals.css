@@ -123,3 +123,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+body{
+  transition: 300 ease-in-out;
+}
+
+.transition-main{
+  filter: blur(20px);
+  transform: translateX(-100%);
+}
