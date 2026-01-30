@@ -1,7 +1,7 @@
 'use client'
 import Link, { LinkProps } from "next/link";
-import { useRouter } from "next/navigation";
-import { sleep } from "./util";
+import { usePathname, useRouter } from "next/navigation";
+import { useLayoutEffect } from "react";
 
 
 interface LinkWithBenefitsProps extends LinkProps {
@@ -11,17 +11,25 @@ interface LinkWithBenefitsProps extends LinkProps {
 
 export default function LinkWithBenefits({ children, href, ...props }: LinkWithBenefitsProps) {
     const router = useRouter();
+    const pathname = usePathname();
+    const CONTAINER_CLASS = '.content_container';
+    const TRANSITION_CLASS = 'transition-main';
 
     async function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
         event.preventDefault();
-        const mainTag = document.querySelector('.content_container');
+        const mainTag = document.querySelector(CONTAINER_CLASS);
         if (!mainTag) return null;
-        mainTag.classList.add('transition-main');
-        await sleep(1000);
+        mainTag.classList.add(TRANSITION_CLASS);
         router.push(href);
-        await sleep(1000);
-        mainTag.classList.remove('transition-main');
     }
+
+    useLayoutEffect(() => {
+        const mainTag = document.querySelector(CONTAINER_CLASS);
+        const hasTransition = mainTag?.classList.contains(TRANSITION_CLASS)
+        if (mainTag && hasTransition) {
+            mainTag.classList.remove(TRANSITION_CLASS);
+        }
+    }, [pathname]);
 
     return (
         <Link
