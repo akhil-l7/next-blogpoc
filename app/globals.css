@@ -125,12 +125,12 @@
 }
 
 .content_container{
-  transition: 300ms ease-in-out;
+  transition: 250ms ease-in-out;
   opacity: 1;
 }
 
 .transition-main{
   filter: blur(2px);
-  transform: translateX(100%);
-  opacity: .5;
+  transform: translateX(110%);
+  opacity: .5
 }
