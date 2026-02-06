@@ -1,9 +1,6 @@
 import { Content } from "@/components/content";
 import { Header } from "@/components/header";
-import LinkWithBenefits from "@/components/linkWithBenefits";
 import client from "@/lib/prismic";
-import { ChevronLeftIcon } from "lucide-react";
-import { Suspense } from "react";
 
 export async function generateStaticParams() {
   const data = await client.getAllByType('blog');

@@ -1,10 +1,8 @@
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { AllDocumentTypes } from "@/prismicio-types";
+import { Button } from "@/components/ui/button";
 import { asDate, DateField, KeyTextField } from "@prismicio/client";
-import { ArrowLeft, ChevronLeftIcon } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import LinkWithBenefits from "./linkWithBenefits";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator } from "./ui/breadcrumb";
 import { Separator } from "./ui/separator";
 
 interface BlogHeaderProps {
