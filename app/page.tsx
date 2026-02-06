@@ -1,13 +1,14 @@
 import LinkWithBenefits from "@/components/linkWithBenefits";
 import { Badge } from "@/components/ui/badge";
 import { Item, ItemContent, ItemDescription, ItemTitle } from "@/components/ui/item";
+import ReadTime from "@/components/ui/readTime";
 import client from "@/lib/prismic";
-import { Clock } from "lucide-react";
 
 export default async function Home() {
   const data = await client.getAllByType('blog');
   const PlaceholderDate = '2026-10-28';
   const badgePlaceholder = 'General'
+
   return (
     <div className="grid xl:grid-cols-2 gap-8">
       {
@@ -19,10 +20,7 @@ export default async function Home() {
                   <div className="flex gap-2">
                     <Badge>{badgePlaceholder}</Badge>
                     <p className="text-muted-foreground text-sm">{data.published_date || PlaceholderDate}</p>
-                    <div className="flex text-muted-foreground">
-                      <Clock size={16} className="mt-0.5 mr-0.5" />
-                      <p className="text-muted-foreground text-sm">&lt;{10} Min Read</p>
-                    </div>
+                    <ReadTime content={data.content} />
                   </div>
                   <h2 className="scroll-m-20 text-4xl font-semibold tracking-tight first:mt-0">
                     <LinkWithBenefits href={`/${id}`}>{data?.title || 'Title'}</LinkWithBenefits>
@@ -39,3 +37,5 @@ export default async function Home() {
     </div>
   );
 }
+
+
