@@ -10,19 +10,20 @@ export default async function Home() {
   const badgePlaceholder = 'General'
 
   return (
-    <div className="grid xl:grid-cols-2 gap-8">
+    <div className="grid md:grid-cols-2 gap-8 mb-4">
       {
         data?.map(({ data, id }) => (
           <Item key={id} variant={"outline"}>
-            <ItemContent>
+            <ItemContent className="self-baseline">
               <ItemTitle>
                 <div className="flex flex-col">
-                  <div className="flex gap-2">
-                    <Badge>{badgePlaceholder}</Badge>
-                    <p className="text-muted-foreground text-sm">{data.published_date || PlaceholderDate}</p>
+                  <div className="flex gap-2 mb-1 lg:mb-2 text-xxs sm:text-xs md:text-sm items-center">
+                    <Badge className="text-xxs text-white">{badgePlaceholder}</Badge>
+                    <p className="text-muted-foreground whitespace-nowrap">{data.published_date || PlaceholderDate}</p>
+                    <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-white" />
                     <ReadTime content={data.content} />
                   </div>
-                  <h2 className="scroll-m-20 text-4xl font-semibold tracking-tight first:mt-0">
+                  <h2 className="capitalize line-clamp-1 leading-normal text-balance text-4xl font-semibold tracking-tight first:mt-0">
                     <LinkWithBenefits href={`/${id}`}>{data?.title || 'Title'}</LinkWithBenefits>
                   </h2>
                 </div>
