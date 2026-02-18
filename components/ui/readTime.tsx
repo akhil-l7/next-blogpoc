@@ -11,9 +11,10 @@ export default function ReadTime({ content }: { content: RichTextField }) {
     const readTime = getReadTime(contentAsText);
 
     return (
-        <div className="flex text-muted-foreground">
-            <Clock size={16} className="mt-0.5 mr-0.5" />
-            <p className="text-muted-foreground text-sm">&lt;{readTime} Min Read</p>
+        <div className="flex text-muted-foreground gap-1 whitespace-nowrap items-center">
+            <Clock className="w-3 h-3 md:w-5 md:h-5" />
+            <p className="text-muted-foreground text-xxs sm:text-xs md:text-sm">
+                &lt;{readTime} Min Read</p>
         </div>
     )
 }
