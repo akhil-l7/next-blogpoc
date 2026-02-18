@@ -13,19 +13,20 @@ interface BlogHeaderProps {
 
 export const Header = ({ category, title, dateField }: BlogHeaderProps) => {
     const publishedDate = asDate(dateField);
-    const dateString = publishedDate?.toLocaleDateString();
+    const dateString = publishedDate?.toLocaleDateString(undefined, { dateStyle: 'full' });
     return (
-        <header className="space-y-5">
+        <header className="space-y-10">
             <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-4 h-6">
+                <div className="flex flex-wrap items-center gap-4 h-6">
                     <LinkWithBenefits href={`/`}>
                         <Button variant="ghost" size="sm" className="gap-2">
                             <ArrowLeft className="h-4 w-4" />
-                            Home
+                            <span className="not-sm:hidden">Home</span>
                         </Button>
                     </LinkWithBenefits>
                     <Separator orientation="vertical" />
-                    <Badge variant="outline">{category || 'Placeholder'}</Badge>
+                    <Badge variant="outline" className="not-sm:hidden">{category || 'Placeholder'}</Badge>
+                    <span className="ml-auto">{dateString}</span>
                 </div>
                 <Separator decorative />
             </div>

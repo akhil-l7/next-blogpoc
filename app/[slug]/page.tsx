@@ -16,7 +16,7 @@ export default async function blog({ params }: { params: Promise<{ slug: string 
     <div className="flex-1 container mx-auto">
       <div className="flex items-center">
         <div className="bg-background min-h-screen w-full">
-          <div className="mx-auto max-w-4xl px-6 py-6">
+          <div className="mx-auto max-w-4xl p-1 md:p-1 lg:px-6">
             {/* https://shadcnexamples.com/blog-detail-page  template */}
             <Header
               category={post.tags[0]}
@@ -24,7 +24,7 @@ export default async function blog({ params }: { params: Promise<{ slug: string 
               title={post.data.title}
             />
 
-            <div className="mt-12">
+            <div className="mt-6">
               <Content
                 content={post.data.content}
                 coverImage={post.data.featured_image}

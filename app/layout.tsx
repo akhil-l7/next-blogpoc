@@ -46,10 +46,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="my-10">
+        <header className="my-2 md:my-8">
           <h1 className="scroll-m-20 text-center text-4xl tracking-tight text-balance">{config?.title || 'blog'}</h1>
         </header>
-        <Separator className="mb-6" />
+        <Separator className="" />
         <main className="container max-w-5xl px-2 mx-auto overflow-hidden">
           <div className="content_container">
             {children}

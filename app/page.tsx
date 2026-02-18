@@ -10,15 +10,15 @@ export default async function Home() {
   const badgePlaceholder = 'General'
 
   return (
-    <div className="grid md:grid-cols-2 gap-8 mb-4">
+    <div className="grid md:grid-cols-2 gap-8 my-4 lg:my-8">
       {
-        data?.map(({ data, id }) => (
+        data?.map(({ data, id, tags }) => (
           <Item key={id} variant={"outline"}>
             <ItemContent className="self-baseline">
               <ItemTitle>
                 <div className="flex flex-col">
                   <div className="flex gap-2 mb-1 lg:mb-2 text-xxs sm:text-xs md:text-sm items-center">
-                    <Badge className="text-xxs text-white">{badgePlaceholder}</Badge>
+                    <Badge className="text-xxs text-white capitalize">{tags?.[0] || badgePlaceholder}</Badge>
                     <p className="text-muted-foreground whitespace-nowrap">{data.published_date || PlaceholderDate}</p>
                     <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-black" />
                     <ReadTime content={data.content} />
