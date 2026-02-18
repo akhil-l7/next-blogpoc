@@ -20,7 +20,7 @@ export default async function Home() {
                   <div className="flex gap-2 mb-1 lg:mb-2 text-xxs sm:text-xs md:text-sm items-center">
                     <Badge className="text-xxs text-white">{badgePlaceholder}</Badge>
                     <p className="text-muted-foreground whitespace-nowrap">{data.published_date || PlaceholderDate}</p>
-                    <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-white" />
+                    <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-black" />
                     <ReadTime content={data.content} />
                   </div>
                   <h2 className="capitalize line-clamp-1 leading-normal text-balance text-4xl font-semibold tracking-tight first:mt-0">
