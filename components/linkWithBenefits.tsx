@@ -2,6 +2,7 @@
 import Link, { LinkProps } from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useLayoutEffect } from "react";
+import { sleep } from "./util";
 
 
 interface LinkWithBenefitsProps extends LinkProps {
@@ -19,13 +20,15 @@ export default function LinkWithBenefits({ children, href, ...props }: LinkWithB
         event.preventDefault();
         const mainTag = document.querySelector(CONTAINER_CLASS);
         if (!mainTag) return null;
+
         mainTag.classList.add(TRANSITION_CLASS);
+        await sleep(500);
         router.push(href);
     }
 
     useLayoutEffect(() => {
         const mainTag = document.querySelector(CONTAINER_CLASS);
-        const hasTransition = mainTag?.classList.contains(TRANSITION_CLASS)
+        const hasTransition = mainTag?.classList.contains(TRANSITION_CLASS);
         if (mainTag && hasTransition) {
             mainTag.classList.remove(TRANSITION_CLASS);
         }
