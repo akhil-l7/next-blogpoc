@@ -47,6 +47,7 @@
   /* --breakpoint-xxs: 0.625rem; was causing container class bug */
   --text-xxs: 0.625rem;
   --text-xxs--line-height: var(--tw-leading, var(--text-xs--line-height));
+  --color-toggle-focus: var(--toggle-focus);
 }
 
 :root {
@@ -82,6 +83,13 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --toggle-sun: #FFCC00;
+  --toggle-sun-dark: #FFB700;
+  --toggle-sun-light: #FFDD55;
+  --toggle-moon: #B0B0B0;
+  --toggle-moon-dark: #A9A9A9;
+  --toggle-moon-light: #D3D3D3;
+  --toggle-focus: #ffffff;
 }
 
 .dark {
@@ -116,11 +124,12 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --toggle-focus: #ddeaf814;
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring/50 transition-all;
   }
 
   body {
