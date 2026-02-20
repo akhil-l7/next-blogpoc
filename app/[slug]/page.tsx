@@ -1,5 +1,5 @@
 import { Content } from "@/components/content";
-import { Header } from "@/components/header";
+import { PostHeader } from "@/components/postHeader";
 import client from "@/lib/prismic";
 
 export async function generateStaticParams() {
@@ -18,7 +18,7 @@ export default async function blog({ params }: { params: Promise<{ slug: string 
         <div className="bg-background min-h-screen w-full">
           <div className="mx-auto max-w-4xl p-1 md:p-1 lg:px-6">
             {/* https://shadcnexamples.com/blog-detail-page  template */}
-            <Header
+            <PostHeader
               category={post.tags[0]}
               dateField={post.data.published_date}
               title={post.data.title}
