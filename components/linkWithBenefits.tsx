@@ -1,7 +1,7 @@
 'use client'
 import Link, { LinkProps } from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
 import { sleep } from "./util";
 
 
@@ -15,23 +15,43 @@ export default function LinkWithBenefits({ children, href, ...props }: LinkWithB
     const pathname = usePathname();
     const CONTAINER_CLASS = '.content_container';
     const TRANSITION_CLASS = 'transition-main';
+    const HEADER_CLASS = '.main_header';
 
     async function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
         event.preventDefault();
         const mainTag = document.querySelector(CONTAINER_CLASS);
-        if (!mainTag) return null;
+        const headerTag = document.querySelector(HEADER_CLASS);
+        const toHome = href === '/';
 
-        mainTag.classList.add(TRANSITION_CLASS);
+        if (mainTag) mainTag.classList.add(TRANSITION_CLASS);
+
+        if (headerTag) {
+            toHome
+                ? headerTag.classList.remove(TRANSITION_CLASS)
+                : headerTag.classList.add(TRANSITION_CLASS)
+        }
+
         await sleep(500);
         router.push(href);
     }
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         const mainTag = document.querySelector(CONTAINER_CLASS);
+        const headTag = document.querySelector(HEADER_CLASS);
         const hasTransition = mainTag?.classList.contains(TRANSITION_CLASS);
-        if (mainTag && hasTransition) {
-            mainTag.classList.remove(TRANSITION_CLASS);
+        const headerHasTransition = headTag?.classList.contains(TRANSITION_CLASS);
+
+        if (hasTransition) {
+            mainTag?.classList.remove(TRANSITION_CLASS);
         }
+        if (pathname !== '/') {
+            if (headerHasTransition) {
+                headTag?.classList.remove(TRANSITION_CLASS);
+            } else {
+                headTag?.classList.add(TRANSITION_CLASS);
+            }
+        }
+
     }, [pathname]);
 
     return (

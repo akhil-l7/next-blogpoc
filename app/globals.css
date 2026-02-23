@@ -142,8 +142,21 @@
   opacity: 1;
 }
 
-.transition-main {
+.content_container.transition-main {
   filter: blur(2px);
   transform: translateX(110%);
   opacity: 0.5
+}
+
+.main_header,.main_header h1 {
+  @apply transition-all duration-1000 motion-reduce:duration-[0s] motion-reduce:transition-none
+}
+
+.main_header.transition-main {
+  @apply md:my-2 md:flex-row
+}
+
+
+.main_header.transition-main h1 {
+  @apply md:text-2xl
 }
