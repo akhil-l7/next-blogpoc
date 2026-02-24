@@ -7,20 +7,6 @@ const nextConfig: NextConfig = {
   basePath: isProd ? '/next-blogpoc' : undefined,
   assetPrefix: isProd ? '/next-blogpoc' : undefined,
   trailingSlash: true,
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: 'https://ak-blogpoc.vercel.app/',
-        permanent: true
-      },
-      {
-        source: '/next-blogpoc',
-        destination: 'https://ak-blogpoc.vercel.app/',
-        permanent: true
-      }
-    ]
-  },
 };
 
 export default nextConfig;
