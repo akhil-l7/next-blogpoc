@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         source: '/',
         destination: 'https://ak-blogpoc.vercel.app/',
         permanent: true
+      },
+      {
+        source: '/next-blogpoc',
+        destination: 'https://ak-blogpoc.vercel.app/',
+        permanent: true
       }
     ]
   },
