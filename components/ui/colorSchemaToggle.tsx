@@ -1,6 +1,6 @@
 'use client'
 import { Moon, Sun } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { sleep } from "../util";
 
 export default function ColorSchemaToggle() {
@@ -21,6 +21,13 @@ export default function ColorSchemaToggle() {
         await sleep(1000);
         setIsAnimating(false);
     }
+
+    useEffect(() => {
+        if (!window) return
+        const isDarkModePreferred = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (isDarkModePreferred !== isDark) toggleSchema();
+    }, []);
 
     return (
         <button data-isanimating={isAnimating} className="px-2 py-0.5 rounded-sm lg:p-2 lg:rounded-4xl cursor-pointer relative data-[isAnimating=true]:pointer-events-none select-none hover:bg-toggle-focus" onClick={toggleSchema}>
