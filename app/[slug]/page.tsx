@@ -1,6 +1,7 @@
 import { Content } from "@/components/content";
 import { PostHeader } from "@/components/postHeader";
 import client from "@/lib/prismic";
+import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
   const data = await client.getAllByType('blog');
@@ -10,8 +11,12 @@ export async function generateStaticParams() {
 
 export default async function blog({ params }: { params: Promise<{ slug: string }> }) {
   const data = await params;
-  const post = await client.getByID(data?.slug);
-
+  let post;
+  try {
+    post = await client.getByID(data?.slug)
+  } catch (error) {
+    notFound();
+  }
   return (
     <div className="flex-1 container mx-auto">
       <div className="flex items-center">
