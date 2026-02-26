@@ -1,10 +1,10 @@
-import { PrismicPyload } from '@/types';
+import { PrismicPayload } from '@/types';
 import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
     try {
-        const payload: PrismicPyload = await req.json();
+        const payload: PrismicPayload = await req.json();
 
         // Extract the secret from the request headers
         const secret = req.headers.get('secret');
@@ -17,12 +17,11 @@ export async function POST(req: NextRequest) {
         if (!isValidSecret) {
             return new NextResponse('Invalid webhook secret', { status: 400 });
         }
-        console.log(JSON.stringify(payload));
 
         // Handle the event only on api update
         if (payload.type === 'api-update') {
-            
-            await triggerRebuild();
+            const documentid = payload.documents;
+            await triggerRebuild(documentid);
             return new NextResponse('Rebuild triggered successfully', { status: 200 });
         } else if (payload.type === 'test-trigger') {
             return new NextResponse('Test trigger success', { status: 200 });
@@ -44,7 +43,7 @@ function verifySecret(payloadSecret: string): boolean {
     return payloadSecret === secret;
 }
 
-async function triggerRebuild() {
+async function triggerRebuild(documentids: string[]) {
     const buildUrl = process.env.VERCEL_BUILD_TRIGGER_URL;
 
     if (!buildUrl) {
@@ -52,4 +51,7 @@ async function triggerRebuild() {
     }
 
     revalidatePath('/');
+    documentids.forEach(documentId => {
+        revalidatePath(`/${documentId}`);
+    });
 }
