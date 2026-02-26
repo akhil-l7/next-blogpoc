@@ -1,4 +1,5 @@
 import { PrismicPyload } from '@/types';
+import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
@@ -48,10 +49,5 @@ async function triggerRebuild() {
         throw new Error('Vercel build URL is not defined');
     }
 
-    const response = await fetch(buildUrl);
-
-    if (!response.ok) {
-        throw new Error('Failed to trigger rebuild');
-    }
-
+    revalidatePath('/');
 }
