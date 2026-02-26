@@ -17,9 +17,11 @@ export async function POST(req: NextRequest) {
         if (!isValidSecret) {
             return new NextResponse('Invalid webhook secret', { status: 400 });
         }
+        console.log(JSON.stringify(payload));
 
         // Handle the event only on api update
         if (payload.type === 'api-update') {
+            
             await triggerRebuild();
             return new NextResponse('Rebuild triggered successfully', { status: 200 });
         } else if (payload.type === 'test-trigger') {
