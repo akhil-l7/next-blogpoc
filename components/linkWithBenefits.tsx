@@ -1,11 +1,11 @@
 'use client'
-import Link, { LinkProps } from "next/link";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { ComponentProps, useEffect } from "react";
 import { sleep } from "./util";
 
 
-interface LinkWithBenefitsProps extends LinkProps {
+interface LinkWithBenefitsProps extends ComponentProps<typeof Link> {
     children: React.ReactNode;
     href: string;
 }
