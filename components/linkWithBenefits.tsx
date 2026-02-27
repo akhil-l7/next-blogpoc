@@ -44,12 +44,8 @@ export default function LinkWithBenefits({ children, href, ...props }: LinkWithB
         if (hasTransition) {
             mainTag?.classList.remove(TRANSITION_CLASS);
         }
-        if (pathname !== '/') {
-            if (headerHasTransition) {
-                headTag?.classList.remove(TRANSITION_CLASS);
-            } else {
-                headTag?.classList.add(TRANSITION_CLASS);
-            }
+        if (pathname !== '/' && !headerHasTransition) {
+            headTag?.classList.add(TRANSITION_CLASS);
         }
 
     }, [pathname]);
