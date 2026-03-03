@@ -1,5 +1,6 @@
 import { ImageField, isFilled, RichTextField } from "@prismicio/client";
 import { PrismicRichText, PrismicImage } from "@prismicio/react";
+import Image from "next/image";
 
 interface BlogContentProps {
     content: RichTextField;
@@ -14,7 +15,7 @@ export const Content = ({ content, coverImage }: BlogContentProps) => {
                 <div className="bg-muted aspect-video w-full overflow-hidden rounded-xl">
                     {hasImage
                         ? (<PrismicImage field={coverImage} />)
-                        : (<img loading="lazy" src={'https://placehold.co/600x400?text=CoverImage'} height={400} width={600} alt="Cover Image" className="h-full w-full object-cover" />)
+                        : (<Image loading="lazy" src={'https://placehold.co/600x400/jpg?text=CoverImage'} height={400} width={600} alt="Cover Image" className="h-full w-full object-cover" />)
                     }
 
                 </div>
@@ -32,3 +33,4 @@ export const Content = ({ content, coverImage }: BlogContentProps) => {
         </article>
     );
 };
+

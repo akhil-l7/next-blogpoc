@@ -31,7 +31,7 @@ const csp = `
 `.replace(/\s{2,}/g, ' ').trim();
 
 const { title, description, url, keywords, authors } = config;
-const imageUrl = 'https://placehold.co/1200x630?text=' + title;
+const imageUrl = 'https://placehold.co/1200x630/jpg?text=' + title;
 
 export const metadata: Metadata = {
   title,
