@@ -1,6 +1,6 @@
 import { config } from "@/app.config";
 import { Separator } from "@/components/ui/separator";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/header";
@@ -30,13 +30,49 @@ const csp = `
     upgrade-insecure-requests;
 `.replace(/\s{2,}/g, ' ').trim();
 
+const { title, description, url, keywords, authors } = config;
+const imageUrl = 'https://placehold.co/1200x630?text=' + title;
+
 export const metadata: Metadata = {
-  title: config.title || 'Blog',
-  description: config.description || "Description of blog",
+  title,
+  description,
+  keywords,
+  authors,
+  openGraph: {
+    title,
+    description,
+    url,
+    siteName: title,
+    images: [
+      {
+        url: imageUrl,
+        width: 1200,
+        height: 630,
+        alt: title + ' image',
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: [imageUrl],
+  },
+  alternates: {
+    canonical: url,
+  },
   other: {
     "Content-Security-Policy": csp
   }
 };
+
+export const viewport: Viewport = {
+  themeColor: '#333333',
+  colorScheme: 'dark light',
+  initialScale: 1,
+  width: 'device-width'
+}
 
 export default function RootLayout({
   children,
