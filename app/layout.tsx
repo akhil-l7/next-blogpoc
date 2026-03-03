@@ -1,10 +1,10 @@
 import { config } from "@/app.config";
+import { Header } from "@/components/header";
 import { Separator } from "@/components/ui/separator";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/header";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -85,7 +85,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
       >
         <Header title={config.title} />
-        <Separator className="" />
+        <Separator />
         <main className="container max-w-5xl px-2 mx-auto overflow-hidden">
           <div className="content_container">
             {children}
