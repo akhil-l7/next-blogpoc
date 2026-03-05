@@ -1,5 +1,6 @@
 import { Content } from "@/components/content";
 import { PostHeader } from "@/components/postHeader";
+import { Comments } from "@/components/comments";
 import client from "@/lib/prismic";
 import { notFound } from "next/navigation";
 
@@ -32,6 +33,7 @@ export default async function blog({ params }: { params: Promise<{ slug: string 
           coverImage={post.data.featured_image}
         />
       </div>
+      <Comments slug={data?.slug || ''} />
     </div>
   );
 }
