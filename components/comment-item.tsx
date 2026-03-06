@@ -1,13 +1,17 @@
-import { Item, ItemMedia, ItemContent, ItemTitle, ItemDescription, ItemSeparator } from "@/components/ui/item";
-import { User, Clock } from "lucide-react";
-import { formatDate } from "./util";
+import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
 import type { Comment } from "@/types/blog";
+import DOMPurify from "isomorphic-dompurify";
+import { Clock, User } from "lucide-react";
+import { formatDate } from "./util";
 
 interface CommentItemProps {
   comment: Comment;
 }
 
 export function CommentItem({ comment }: CommentItemProps) {
+  const sanitizedMessage = DOMPurify.sanitize(comment.message);
+  const sanitizedName = DOMPurify.sanitize(comment.name);
+  
   return (
     <>
       <Item variant="outline">
@@ -16,7 +20,7 @@ export function CommentItem({ comment }: CommentItemProps) {
         </ItemMedia>
         <ItemContent>
           <ItemTitle>
-            {comment.name || "Anonymous"}
+            {sanitizedName || "Anonymous"}
           </ItemTitle>
           <ItemDescription>
             <span className="flex items-center gap-1">
@@ -26,7 +30,7 @@ export function CommentItem({ comment }: CommentItemProps) {
           </ItemDescription>
         </ItemContent>
         <p className="mt-2 text-sm whitespace-pre-wrap basis-full">
-          {comment.message}
+          {sanitizedMessage}
         </p>
       </Item>
     </>

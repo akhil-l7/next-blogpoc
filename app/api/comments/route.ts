@@ -1,5 +1,6 @@
 import { HTTP_STATUS } from '@/lib/constants';
 import { neon } from '@neondatabase/serverless';
+import DOMPurify from "isomorphic-dompurify";
 import { type NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
@@ -36,7 +37,10 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { id, slug, name, message } = body;
 
-    if (!slug || !message) {
+    const sanitizedMessage = DOMPurify.sanitize(message);
+    const sanitizedName = DOMPurify.sanitize(name);
+
+    if (!slug || !sanitizedMessage) {
       return new NextResponse('Slug and message are required', { status: HTTP_STATUS.BAD_REQUEST });
     }
 
@@ -53,7 +57,7 @@ export async function POST(request: NextRequest) {
 
     const result = await sql`
       INSERT INTO public.comments (id, slug, name, message)
-      VALUES (${id}, ${slug}, ${name || 'Anonymous'}, ${message})
+      VALUES (${id}, ${slug}, ${sanitizedName || 'Anonymous'}, ${sanitizedMessage})
       RETURNING *
     `;
 

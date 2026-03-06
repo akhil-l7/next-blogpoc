@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Send } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { getErrorText, getVisitorId } from "./util";
+import DOMPurify from "isomorphic-dompurify";
 
 interface CommentFormProps {
   slug: string;
@@ -34,6 +35,9 @@ export function CommentForm({ slug, onCommentSubmitted }: CommentFormProps) {
 
     setIsSubmitting(true);
     try {
+      const sanitizedMessage = DOMPurify.sanitize(trimmedMessage);
+      const sanitizedName = DOMPurify.sanitize(trimmedName || 'Anonymous');
+
       const response = await fetch("/api/comments", {
         method: "POST",
         headers: {
@@ -42,8 +46,8 @@ export function CommentForm({ slug, onCommentSubmitted }: CommentFormProps) {
         body: JSON.stringify({
           id,
           slug,
-          name: trimmedName,
-          message: trimmedMessage,
+          name: sanitizedName,
+          message: sanitizedMessage,
         }),
       });
 
