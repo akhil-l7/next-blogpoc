@@ -37,7 +37,8 @@ export async function POST(req: NextRequest) {
 function verifySecret(payloadSecret: string): boolean {
     const secret = process.env.PRISMIC_WEBHOOK_SECRET;
     if (!secret) {
-        throw new Error('webhook secret not defined');
+        console.error('Webhook secret is not configured properly.');
+        return false;
     }
 
     return payloadSecret === secret;
