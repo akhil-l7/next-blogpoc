@@ -84,9 +84,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
       >
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-background"
+        >
+          Skip to main content
+        </a>
         <Header title={config.title} />
         <Separator />
-        <main className="container max-w-5xl px-2 mx-auto overflow-hidden">
+        <main id="main-content" className="container max-w-5xl px-2 mx-auto overflow-hidden">
           <div className="content_container">
             {children}
           </div>

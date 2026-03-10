@@ -73,7 +73,7 @@ export function CommentForm({ slug, onCommentSubmitted }: CommentFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 w-full mt-4">
-      {error && (<p className="text-red-600 text-center">{error}</p>)}
+      {error && (<p className="text-red-600 text-center" role="alert">{error}</p>)}
       <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="name">Name</Label>
@@ -97,7 +97,7 @@ export function CommentForm({ slug, onCommentSubmitted }: CommentFormProps) {
           rows={4}
         />
       </div>
-      <Button type="submit" disabled={isSubmitting || !message.trim()}>
+      <Button type="submit" disabled={isSubmitting || !message.trim()} aria-busy={isSubmitting}>
         <Send className="h-4 w-4" />
         {isSubmitting ? "Submitting..." : "Submit"}
       </Button>

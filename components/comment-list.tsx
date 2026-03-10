@@ -11,7 +11,11 @@ interface CommentListProps {
 export function CommentList({ comments, isLoading }: CommentListProps) {
   if (isLoading) {
     return (
-      <p className="text-muted-foreground text-center py-4">
+      <p
+        className="text-muted-foreground text-center py-4"
+        aria-live="polite"
+        aria-busy
+      >
         Loading comments...
       </p>
     );
