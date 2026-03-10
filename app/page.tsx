@@ -3,11 +3,10 @@ import { Badge } from "@/components/ui/badge";
 import { Item, ItemContent, ItemDescription, ItemTitle } from "@/components/ui/item";
 import ReadTime from "@/components/ui/readTime";
 import client from "@/lib/prismic";
+import { BLOG } from "@/lib/constants";
 
 export default async function Home() {
   const data = await client.getAllByType('blog');
-  const PlaceholderDate = '2026-10-28';
-  const badgePlaceholder = 'General'
 
   return (
     <div className="grid md:grid-cols-2 gap-8 my-4 lg:my-8">
@@ -18,8 +17,8 @@ export default async function Home() {
               <ItemTitle>
                 <div className="flex flex-col">
                   <div className="flex gap-2 mb-1 lg:mb-2 text-xxs sm:text-xs md:text-sm items-center">
-                    <Badge className="text-xxs capitalize text-white dark:text-black">{tags?.[0] || badgePlaceholder}</Badge>
-                    <p className="text-muted-foreground whitespace-nowrap">{data.published_date || PlaceholderDate}</p>
+                    <Badge className="text-xxs capitalize text-white dark:text-black">{tags?.[0] || BLOG.PLACEHOLDER_BADGE}</Badge>
+                    <p className="text-muted-foreground whitespace-nowrap">{data.published_date || BLOG.PLACEHOLDER_DATE}</p>
                     <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-black dark:bg-white" />
                     <ReadTime content={data.content} />
                   </div>

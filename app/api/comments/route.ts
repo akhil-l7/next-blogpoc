@@ -1,4 +1,4 @@
-import { HTTP_STATUS } from '@/lib/constants';
+import { COMMENTS, HTTP_STATUS } from '@/lib/constants';
 import { neon } from '@neondatabase/serverless';
 import DOMPurify from "isomorphic-dompurify";
 import { type NextRequest, NextResponse } from 'next/server';
@@ -30,6 +30,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  const { MAX_MESSAGE_LENGTH, MAX_NAME_LENGTH } = COMMENTS
   const db_url = process.env.DATABASE_URL;
   if (!db_url) return new NextResponse('Database URL not configured', { status: HTTP_STATUS.INTERNAL_SERVER_ERROR });
 
@@ -42,6 +43,14 @@ export async function POST(request: NextRequest) {
 
     if (!slug || !sanitizedMessage) {
       return new NextResponse('Slug and message are required', { status: HTTP_STATUS.BAD_REQUEST });
+    }
+
+    if (sanitizedMessage.length > MAX_MESSAGE_LENGTH) {
+      return new NextResponse('Message too long.', { status: HTTP_STATUS.BAD_REQUEST });
+    }
+
+    if (sanitizedName.length > MAX_NAME_LENGTH) {
+      return new NextResponse('Name Too long.', { status: HTTP_STATUS.BAD_REQUEST });
     }
 
     const sql = neon(db_url);

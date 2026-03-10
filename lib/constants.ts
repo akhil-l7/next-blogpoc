@@ -6,6 +6,13 @@ export const COMMENTS = {
   TABLE_NAME: 'public.comments',
   DEFAULT_NAME: 'Anonymous',
   ORDER_BY: 'createdAt',
+  MAX_MESSAGE_LENGTH: 5000,
+  MAX_NAME_LENGTH: 100,
+} as const;
+
+export const BLOG = {
+  PLACEHOLDER_DATE: '2026-10-28',
+  PLACEHOLDER_BADGE: 'General',
 } as const;
 
 export const STORAGE_KEYS = {
