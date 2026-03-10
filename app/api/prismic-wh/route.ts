@@ -1,4 +1,5 @@
 import { PrismicPayload } from '@/types';
+import { timingSafeEqual } from 'crypto';
 import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -40,8 +41,13 @@ function verifySecret(payloadSecret: string): boolean {
         console.error('Webhook secret is not configured properly.');
         return false;
     }
+    
+    const bufferA = Buffer.from(payloadSecret);
+    const bufferB = Buffer.from(secret);
 
-    return payloadSecret === secret;
+    if (bufferA.length !== bufferB.length) return false;
+
+    return timingSafeEqual(bufferA, bufferB);
 }
 
 async function triggerRebuild(documentids: string[]) {
