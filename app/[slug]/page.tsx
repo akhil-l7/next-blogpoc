@@ -3,6 +3,8 @@ import { PostHeader } from "@/components/postHeader";
 import { Comments } from "@/components/comments";
 import client from "@/lib/prismic";
 import { notFound } from "next/navigation";
+import { NotFoundError } from "@prismicio/client";
+import NotFound from "./not-found";
 
 export async function generateStaticParams() {
   const data = await client.getAllByType('blog');
@@ -16,7 +18,12 @@ export default async function blog({ params }: { params: Promise<{ slug: string 
   try {
     post = await client.getByID(data?.slug)
   } catch (error) {
-    notFound();
+    if (error instanceof NotFoundError) {
+      notFound();
+    } else {
+      console.error('Unexpected error:', error);
+      return <NotFound errorMessage="Unexpected error has Occoured." />
+    }
   }
   return (
     <div className="container mx-auto bg-background min-h-screen lg:px-6">
