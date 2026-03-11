@@ -21,9 +21,13 @@ export async function POST(req: NextRequest) {
 
         // Handle the event only on api update
         if (payload.type === 'api-update') {
-            const documentid = payload.documents;
-            await triggerRebuild(documentid);
-            return new NextResponse('Rebuild triggered successfully', { status: 200 });
+            const documentids = payload.documents;
+            // Revalidate the home page and affected blog posts
+            revalidatePath('/');
+            for (const documentId of documentids) {
+                revalidatePath(`/${documentId}`);
+            }
+            return new NextResponse('Revalidation triggered successfully', { status: 200 });
         } else if (payload.type === 'test-trigger') {
             return new NextResponse('Test trigger success', { status: 200 });
         }
@@ -48,17 +52,4 @@ function verifySecret(payloadSecret: string): boolean {
     if (bufferA.length !== bufferB.length) return false;
 
     return timingSafeEqual(bufferA, bufferB);
-}
-
-async function triggerRebuild(documentids: string[]) {
-    const buildUrl = process.env.VERCEL_BUILD_TRIGGER_URL;
-
-    if (!buildUrl) {
-        throw new Error('Vercel build URL is not defined');
-    }
-
-    revalidatePath('/');
-    documentids.forEach(documentId => {
-        revalidatePath(`/${documentId}`);
-    });
 }
