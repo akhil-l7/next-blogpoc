@@ -1,23 +1,14 @@
 ﻿---
 
-  
-
 # **Next.js Blog POC**
-
-  
 
 ---
 
-  
-
 ## **Project Overview**
-
-  
 
 This is a **SSG blog** with the following features:
 
   
-
 * **Content Management:** Prismic CMS.
 
 * **Comments:** Anonymous commenting system using **Neon DB** (PostgreSQL).
@@ -25,8 +16,6 @@ This is a **SSG blog** with the following features:
 * **Deployment:** Vercel with performance, caching, and security optimizations.
 
 * Implement a scalable, fast, and SEO-friendly blog.
-
-* Enable anonymous commenting.
 
   
 
@@ -70,11 +59,9 @@ Prismic CMS → Build Time (SSG) → Static HTML (Vercel Edge)
 
 **Comments:**
 
-  
-
 ```
 
-Client Browser → /api/comments → Neon DB (PostgreSQL)
+Client Browser → Server Action (submitComment) → Neon DB (PostgreSQL)
 
 ```
 
@@ -98,59 +85,15 @@ Prismic CMS → Webhook /api/prismic-wh → Revalidate Cache (Next.js)
 
 ### **API Endpoints**
 
-  
-
 | Method | Endpoint | Description |
-
 | ------ | --------------------------- | ------------------------------ |
-
-| GET |  `/api/comments?slug={slug}`  | Fetch comments for a post |
-
-| POST |  `/api/comments`  | Submit new comment |
-
 | POST |  `/api/prismic-wh`  | Handle Prismic webhook updates |
 
-  
+> **Note:** Comments are fetched directly in the Server Component (`Comments.tsx`) using Neon DB queries, via server actions.
+
 
 ---
 
-  
-
-### **Component Hierarchy**
-
-  
-
-```
-
-RootLayout
-
-└── Header (ColorSchemaToggle)
-
-└── Main Content
-
-├── HomePage (/)
-
-│ └── Item (Blog Card)
-
-└── BlogPostPage (/[slug])
-
-├── PostHeader
-
-├── Content (PrismicRichText)
-
-└── Comments
-
-├── CommentList
-
-│ └── CommentItem
-
-└── CommentForm
-
-```
-
-  
-
----
 
   
 
@@ -208,19 +151,17 @@ Selected **Neon DB** because it provides a **secure, scalable, and efficient sol
 
 * **Data structure:**
 
-  
-
 ```json
 
 {
 
-"id": "uuid",
+"id": "visitorId__slug",
 
-"slug": "slug",
+"slug": "post-slug",
 
-"name": "Comment text",
+"name": "Commenter name (or 'Anonymous')",
 
-"message": "Anonymous",
+"message": "Comment text",
 
 "createdAt": 1678592921000
 
@@ -228,7 +169,10 @@ Selected **Neon DB** because it provides a **secure, scalable, and efficient sol
 
 ```
 
-  
+> **Note:** The `id` field uses a composite key (`visitorId__slug`) to enforce one comment per post per user at the database level.
+
+## Limitation
+id can be removed, but ip based limiting has been added.  
 
 ---
 
@@ -333,37 +277,16 @@ Selected **Neon DB** because it provides a **secure, scalable, and efficient sol
 
 ## **Security Measures**
 
-  
-
 * **Vercel Firewall**: Blocks AI bots, rate-limits POST requests.
 
 * **localStorage**: Prevents multiple comments per post per user.
 
-* **Sanitization**: Comments validated for content length and XSS.
+* **Sanitization**: Comments validated for content length and XSS using **DOMPurify** on both client and server sides.
 
-  
+* **Content Security Policy (CSP)**: Strict CSP headers configured in `RootLayout` to prevent XSS and code injection attacks.
 
----
+* **Webhook Secret Validation**: Prismic webhook endpoint validates the secret using timing-safe comparison to prevent unauthorized revalidation.
 
-  
-
-## **Performance Optimizations**
-
-  
-
-* SSG + ISR for **fast TTFB**.
-
-* Dynamic imports and lazy loading to reduce bundle size.
-
-* Preconnect and prefetch resources.
-
-* Image and font optimization.
-
-  
-
----
-
-  
 
 ## **Future Considerations**
 
@@ -373,10 +296,11 @@ Selected **Neon DB** because it provides a **secure, scalable, and efficient sol
 
 * Introduce searchable and filterable comments.
 
-* Monitor Neon DB usage as traffic grows.
+* Monitor Neon DB usage.
 
 * Analytics and insights on comment engagement.
 
+* Better anonymous features   
   
 
 ---
