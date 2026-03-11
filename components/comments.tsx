@@ -1,41 +1,31 @@
-"use client";
-
 import { Item, ItemContent, ItemDescription, ItemHeader, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { Separator } from "@/components/ui/separator";
 import type { Comment } from "@/types/blog";
+import { neon } from "@neondatabase/serverless";
 import { MessageCircle } from "lucide-react";
-import { useEffect, useState } from "react";
 import { CommentForm } from "./comment-form";
 import { CommentList } from "./comment-list";
+
+async function getComments(slug: string): Promise<Comment[]> {
+  const db_url = process.env.DATABASE_URL;
+  if (!db_url) return [];
+
+  try {
+    const sql = neon(db_url);
+    const comments = await sql`SELECT * FROM public.comments WHERE "slug" = ${slug} ORDER BY "createdAt"`;
+    return comments as Comment[];
+  } catch (error) {
+    console.error("Failed to fetch comments:", error);
+    return [];
+  }
+}
 
 interface CommentsProps {
   slug: string;
 }
 
-export function Comments({ slug }: CommentsProps) {
-  const [comments, setComments] = useState<Comment[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    fetchComments();
-  }, []);
-
-  const fetchComments = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch(`/api/comments?slug=${slug}`);
-      const data = await response.json();
-      setComments(data || []);
-    } catch (error) {
-      console.error("Failed to fetch comments:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleCommentSubmitted = () => {
-    fetchComments();
-  };
+export async function Comments({ slug }: CommentsProps) {
+  const comments = await getComments(slug);
 
   return (
     <Item className="my-1" variant={"outline"}>
@@ -55,9 +45,9 @@ export function Comments({ slug }: CommentsProps) {
       <Separator />
 
       <div className="space-y-4 w-full my-4" >
-        <CommentList comments={comments} isLoading={isLoading} />
+        <CommentList comments={comments} />
       </div>
-      <CommentForm slug={slug} onCommentSubmitted={handleCommentSubmitted} />
+      <CommentForm slug={slug} />
     </Item>
   );
 }

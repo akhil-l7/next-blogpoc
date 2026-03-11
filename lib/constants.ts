@@ -6,7 +6,7 @@ export const COMMENTS = {
   TABLE_NAME: 'public.comments',
   DEFAULT_NAME: 'Anonymous',
   ORDER_BY: 'createdAt',
-  MAX_MESSAGE_LENGTH: 5000,
+  MAX_MESSAGE_LENGTH: 4000,
   MAX_NAME_LENGTH: 100,
 } as const;
 

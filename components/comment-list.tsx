@@ -1,26 +1,13 @@
-import React from "react";
 import { ItemGroup } from "@/components/ui/item";
-import { CommentItem } from "./comment-item";
 import type { Comment } from "@/types/blog";
+import React from "react";
+import { CommentItem } from "./comment-item";
 
 interface CommentListProps {
   comments: Comment[];
-  isLoading: boolean;
 }
 
-export function CommentList({ comments, isLoading }: CommentListProps) {
-  if (isLoading) {
-    return (
-      <p
-        className="text-muted-foreground text-center py-4"
-        aria-live="polite"
-        aria-busy
-      >
-        Loading comments...
-      </p>
-    );
-  }
-
+export function CommentList({ comments }: CommentListProps) {
   if (comments.length === 0) {
     return (
       <p className="text-muted-foreground text-center py-4">
