@@ -22,7 +22,7 @@ export default async function blog({ params }: { params: Promise<{ slug: string 
       notFound();
     } else {
       console.error('Unexpected error:', error);
-      return <NotFound errorMessage="Unexpected error has Occoured." />
+      return <NotFound errorMessage="Unexpected error has occurred." />
     }
   }
   return (

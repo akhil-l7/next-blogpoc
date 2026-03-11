@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { asDate, DateField, KeyTextField } from "@prismicio/client";
 import { ArrowLeft } from "lucide-react";
-import LinkWithBenefits from "./linkWithBenefits";
+import { LinkWithBenefits } from "./linkWithBenefits";
 import { Separator } from "./ui/separator";
 
 interface BlogHeaderProps {
