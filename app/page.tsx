@@ -7,7 +7,15 @@ import { BLOG } from "@/lib/constants";
 
 export default async function Home() {
   const data = await client.getAllByType('blog');
-
+  if (data.length === 0) {
+    return (
+      <div className="container flex items-center justify-center p-8">
+        <h1>
+          No blog posts yet...
+        </h1>
+      </div>
+    )
+  }
   return (
     <div className="grid md:grid-cols-2 gap-8 my-4 lg:my-8">
       {
