@@ -2,7 +2,7 @@ import { asText, isFilled, RichTextField } from "@prismicio/client";
 import { getReadTime } from "../util";
 import { Clock } from "lucide-react";
 
-export default function ReadTime({ content }: { content: RichTextField }) {
+export function ReadTime({ content }: { content: RichTextField }) {
     const hasValue = isFilled.richText(content);
     if (!hasValue) {
         return null;

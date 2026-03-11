@@ -3,7 +3,7 @@ import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import { sleep } from "../util";
 
-export default function ColorSchemaToggle() {
+export function ColorSchemaToggle() {
     const [isDark, setIsDark] = useState(true);
     const [isAnimating, setIsAnimating] = useState(false);
     const label = isDark ? "Switch to light mode" : "Switch to dark mode";

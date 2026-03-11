@@ -1,7 +1,7 @@
-import LinkWithBenefits from "@/components/linkWithBenefits";
+import { LinkWithBenefits } from "@/components/linkWithBenefits";
 import { Badge } from "@/components/ui/badge";
 import { Item, ItemContent, ItemDescription, ItemTitle } from "@/components/ui/item";
-import ReadTime from "@/components/ui/readTime";
+import { ReadTime } from "@/components/ui/readTime";
 import client from "@/lib/prismic";
 import { BLOG } from "@/lib/constants";
 

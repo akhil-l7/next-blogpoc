@@ -10,7 +10,7 @@ interface LinkWithBenefitsProps extends ComponentProps<typeof Link> {
     href: string;
 }
 
-export default function LinkWithBenefits({ children, href, prefetch = false, ...props }: LinkWithBenefitsProps) {
+export function LinkWithBenefits({ children, href, prefetch = false, ...props }: LinkWithBenefitsProps) {
     const router = useRouter();
     const pathname = usePathname();
     const CONTAINER_CLASS = '.content_container';

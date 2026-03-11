@@ -1,4 +1,4 @@
-import LinkWithBenefits from '@/components/linkWithBenefits'
+import { LinkWithBenefits } from '@/components/linkWithBenefits'
 import { Button } from '@/components/ui/button'
 
 type NotFound = {

@@ -1,5 +1,5 @@
 import { KeyTextField } from "@prismicio/client";
-import ColorSchemaToggle from "./ui/colorSchemaToggle";
+import { ColorSchemaToggle } from "./ui/colorSchemaToggle";
 
 interface HeaderProps {
     title?: KeyTextField;
