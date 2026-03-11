@@ -13,6 +13,8 @@ export const COMMENTS = {
 export const BLOG = {
   PLACEHOLDER_DATE: '2026-10-28',
   PLACEHOLDER_BADGE: 'General',
+  MAX_TITLE_LENGTH: 40,
+  MAX_EXCERPT_LENGTH: 160,
 } as const;
 
 export const STORAGE_KEYS = {
