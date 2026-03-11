@@ -92,7 +92,7 @@ export default function RootLayout({
         </a>
         <Header title={config.title} />
         <Separator />
-        <main id="main-content" className="container max-w-5xl px-2 mx-auto overflow-hidden">
+        <main id="main-content" className="container max-w-5xl px-2 mx-auto overflow-hidden mb-8">
           <div className="content_container">
             {children}
           </div>
