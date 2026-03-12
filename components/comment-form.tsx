@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { COMMENTS, HTTP_STATUS } from "@/lib/constants";
-import DOMPurify from "isomorphic-dompurify";
+const DOMPurifyPromise = import("isomorphic-dompurify");
 import { Send } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { getVisitorId } from "./util";
@@ -50,6 +50,7 @@ export function CommentForm({ slug }: CommentFormProps) {
       return;
     }
 
+    const { default: DOMPurify } = await DOMPurifyPromise;
     const sanitizedMessage = DOMPurify.sanitize(trimmedMessage);
     const sanitizedName = DOMPurify.sanitize(trimmedName || COMMENTS.DEFAULT_NAME);
 
