@@ -155,8 +155,3 @@
 .main_header.transition-main {
   @apply md:my-2 md:flex-row
 }
-
-
-.main_header.transition-main h1 {
-  @apply md:text-2xl
-}
