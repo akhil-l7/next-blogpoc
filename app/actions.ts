@@ -2,7 +2,7 @@
 
 import { COMMENTS, HTTP_STATUS } from '@/lib/constants';
 import { neon } from '@neondatabase/serverless';
-import DOMPurify from "isomorphic-dompurify";
+import { sanitize, clearWindow } from "isomorphic-dompurify";
 import { revalidatePath } from 'next/cache';
 
 export async function submitComment(formData: FormData) {
@@ -31,8 +31,8 @@ export async function submitComment(formData: FormData) {
       return { error: 'Name too long.', status: HTTP_STATUS.BAD_REQUEST };
     }
 
-    const sanitizedMessage = DOMPurify.sanitize(message);
-    const sanitizedName = DOMPurify.sanitize(name || COMMENTS.DEFAULT_NAME);
+    const sanitizedMessage = sanitize(message);
+    const sanitizedName = sanitize(name || COMMENTS.DEFAULT_NAME);
 
     const sql = neon(db_url);
 
@@ -53,7 +53,7 @@ export async function submitComment(formData: FormData) {
     }
 
     revalidatePath(`/${slug}`);
-
+    clearWindow();
     return { success: true, status: HTTP_STATUS.CREATED };
   } catch (error) {
     console.error('Error creating comment:', error);
