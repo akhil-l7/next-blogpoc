@@ -1,6 +1,6 @@
 import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
 import type { Comment } from "@/types/blog";
-import DOMPurify from "isomorphic-dompurify";
+import DOMPurify from "dompurify";
 import { Clock, User } from "lucide-react";
 import { formatDate } from "./util";
 

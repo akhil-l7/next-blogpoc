@@ -9,6 +9,7 @@ import { COMMENTS, HTTP_STATUS } from "@/lib/constants";
 import { Send } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { getVisitorId } from "./util";
+import DOMPurify from "dompurify";
 
 interface CommentFormProps {
   slug: string;
@@ -48,7 +49,8 @@ export function CommentForm({ slug }: CommentFormProps) {
       setError({ type: 'name-too-long', current: trimmedName.length, max: COMMENTS.MAX_NAME_LENGTH });
       return;
     }
-
+    const sanitizedName = DOMPurify.sanitize(trimmedName);
+    const sanitizedMessage = DOMPurify.sanitize(trimmedMessage);
 
     const visitorId = getVisitorId();
     const id = `${visitorId}__${slug}`;
@@ -59,8 +61,8 @@ export function CommentForm({ slug }: CommentFormProps) {
       const formData = new FormData();
       formData.append('id', id);
       formData.append('slug', slug);
-      formData.append('name', name);
-      formData.append('message', message);
+      formData.append('name', sanitizedName);
+      formData.append('message', sanitizedMessage);
 
       const result = await submitComment(formData);
 
