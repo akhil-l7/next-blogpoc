@@ -1,5 +1,6 @@
 import { config } from "@/app.config";
 import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 import { Separator } from "@/components/ui/separator";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
@@ -97,6 +98,8 @@ export default function RootLayout({
             {children}
           </div>
         </main>
+        <Separator />
+        <Footer />
         <SpeedInsights />
       </body>
     </html>
