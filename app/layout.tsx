@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ScrollToTop, ScrollToTopMarker } from "@/components/ui/scroll-to-top";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -94,12 +95,14 @@ export default function RootLayout({
         <Header title={config.title} />
         <Separator />
         <main id="main-content" className="container max-w-5xl px-2 mx-auto overflow-hidden mb-8">
-          <div className="content_container">
+          <div className="content_container relative">
+            <ScrollToTopMarker />
             {children}
           </div>
         </main>
         <Separator />
         <Footer />
+        <ScrollToTop />
         <SpeedInsights />
       </body>
     </html>
