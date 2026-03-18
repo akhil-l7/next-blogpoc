@@ -8,15 +8,25 @@ export const ScrollToTop = () => {
 
     useEffect(() => {
         if (typeof document === 'undefined') return;
-        const middleElement = document.querySelector('#middle_of_the_doc');
-        if (!middleElement) return;
 
-        const observer = new IntersectionObserver((([entry]) => {
-            setIsVisible(entry.isIntersecting)
-        }), {});
+        const domElement = document.documentElement;
 
-        observer.observe(middleElement);
-        return () => observer.disconnect();
+        if (domElement.scrollHeight < domElement.clientHeight) return;
+
+        const handleScroll = () => {
+            window.requestAnimationFrame(() => {
+                const scrollTop = window.scrollY || window.pageYOffset;
+                const scrollHeight = domElement.scrollHeight - domElement.clientHeight;
+                setIsVisible(scrollTop / scrollHeight > 0.5);
+            });
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        handleScroll();
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
     }, []);
 
     const scrollToTop = () => {
@@ -38,7 +48,3 @@ export const ScrollToTop = () => {
         </Button>
     );
 };
-
-export const ScrollToTopMarker = () => (
-    <span className="invisible absolute top-[50%] h-[50%] right-0" id="middle_of_the_doc"></span>
-)

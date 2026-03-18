@@ -79,7 +79,7 @@ export default async function blog({ params }: { params: Promise<{ slug: string 
     }
   }
   return (
-    <div className="container mx-auto bg-background min-h-screen lg:px-6">
+    <div className="container mx-auto bg-background lg:px-6">
       {/* https://shadcnexamples.com/blog-detail-page  template */}
       <PostHeader
         category={post.tags[0]}
