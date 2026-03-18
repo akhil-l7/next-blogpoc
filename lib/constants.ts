@@ -12,13 +12,14 @@ export const COMMENTS = {
 
 export const BLOG = {
   PLACEHOLDER_DATE: '2026-10-28',
-  PLACEHOLDER_BADGE: 'General',
+  PLACEHOLDER_BADGE: 'generic',
   MAX_TITLE_LENGTH: 40,
   MAX_EXCERPT_LENGTH: 160,
 } as const;
 
 export const STORAGE_KEYS = {
   VISITOR_ID: 'visitorId',
+  TAG_KEY: 'tag_key',
 } as const;
 
 export const HTTP_STATUS = {

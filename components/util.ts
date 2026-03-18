@@ -57,3 +57,13 @@ export function getVisitorId(): string {
   return id;
 }
 
+export function getSelectedTagFromLocalStorage(): string | null {
+  const tag = localStorage.getItem(STORAGE_KEYS.TAG_KEY);
+  return tag;
+}
+
+
+export function setSelectedTagToLocalStorage(tag: string): void {
+  localStorage.setItem(STORAGE_KEYS.TAG_KEY, tag);
+}
+
