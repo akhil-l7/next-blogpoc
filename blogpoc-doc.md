@@ -15,6 +15,8 @@ This is a **SSG blog** with the following features:
 
 * **Deployment:** Vercel with performance, caching, and security optimizations.
 
+* **Tag Filtering:** Client-side filtering of blog posts by Prismic tags.
+
 * Implement a scalable, fast, and SEO-friendly blog.
 
   
@@ -35,9 +37,9 @@ This is a **SSG blog** with the following features:
 
   
 
-* Server Components: Prismic data fetching (home, blog posts).
+* Server Components: Prismic data fetching (home, blog posts, tags via TopBar).
 
-* Client Components: Interactive UI (comments, theme toggle).
+* Client Components: Interactive UI (comments, theme toggle, tag filtering).
 
   
 
@@ -77,7 +79,17 @@ Prismic CMS → Webhook /api/prismic-wh → Revalidate Cache (Next.js)
 
 ```
 
-  
+
+
+**Tag Filtering:**
+
+```
+
+
+Prismic Tags → Server Fetch (TopBar) → Client Filter (Tags component, localStorage, DOM toggle)
+
+
+```
 
 ---
 
@@ -176,7 +188,66 @@ id can be removed, but ip based limiting has been added.
 
 ---
 
-  
+## **Tag Filtering**
+
+Client-side filtering of blog posts by Prismic tags on the home page.
+
+### **Overview**
+
+Users can filter blog posts by clicking on tag badges. The selection persists across sessions using `localStorage`, and a "Clear" option allows users to reset the filter.
+
+### **Components**
+
+#### **1. `TopBar.tsx` (Server-side)**
+
+* Fetches all tags from Prismic using `client.getTags()`.
+* Conditionally renders the `Tags` component if tags exist.
+
+#### **2. `Tags.tsx` (Client-side)**
+
+* Displays tags as interactive badges.
+* **Filtering behavior:**
+
+  * Clicking a tag shows only posts with that tag.
+  * Implemented via `classList.toggle('hidden')` on posts: `#__posts div[data-tag]`.
+  * Active tag highlights with a green background.
+* **Clear filter:**
+
+  * A "Clear" badge resets all filters and shows all posts.
+* **Persistence:**
+
+  * Selected tag is stored in `localStorage` under `STORAGE_KEYS.TAG_KEY`.
+  * Filter is reapplied on page reload.
+* **UI enhancements:**
+
+  * Custom horizontal scrollbar via `.scrollbar-custom`.
+  * Overflow-x scrolling for tag row (`overflow-x-auto`) with responsive alignment (`justify-end md:justify-center`).
+  * `title` attributes for badges improve accessibility.
+
+### **Post Tagging**
+
+* On the home page (`app/page.tsx`), each post item is assigned a `data-tag` attribute:
+
+  ```tsx
+  data-tag={firstTag || 'generic'}
+  ```
+
+  * `firstTag` is derived from `post.tags[0]`.
+  * If no tags are present, a placeholder (`BLOG.PLACEHOLDER_BADGE`) is used.
+
+### **Storage**
+
+* `localStorage.tag_key` retains the currently selected tag.
+* Cleared when the user clicks the "Clear" badge.
+
+### **User Experience**
+
+* Responsive horizontal scrolling for tags ensures usability on smaller screens.
+* Clear visual feedback for active filters.
+* Accessibility support with descriptive `title` attributes for each tag badge.
+
+---
+
 
 ## **Daily tasks**
 
@@ -272,7 +343,7 @@ id can be removed, but ip based limiting has been added.
 
 * Replaced **Vercel blob** with **NeonDB** for better storage and performance.
 
-  
+---
   
 
 ## **Security Measures**
@@ -294,13 +365,14 @@ id can be removed, but ip based limiting has been added.
 
 * Automate moderation workflows.
 
-* Introduce searchable and filterable comments.
+* Introduce searchable posts.
 
-* Monitor Neon DB usage.
+* Monitor Neon DB usage.th and XSS using **DOMPur
 
 * Analytics and insights on comment engagement.
 
-* Better anonymous features   
-  
+* Server-side tag filtering for SEO/large post counts.
 
 ---
+
+
