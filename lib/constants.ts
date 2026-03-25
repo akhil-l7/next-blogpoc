@@ -29,7 +29,6 @@ export const BLOG = {
 
 export const STORAGE_KEYS = {
   VISITOR_ID: 'visitorId',
-  TAG_KEY: 'tag_key',
 } as const;
 
 export const HTTP_STATUS = {

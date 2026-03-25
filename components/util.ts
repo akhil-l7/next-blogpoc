@@ -58,11 +58,3 @@ export function getVisitorId(): string {
   return id;
 }
 
-export function getSelectedTagFromLocalStorage(): string | null {
-  return storage.getSelectedTag();
-}
-
-export function setSelectedTagToLocalStorage(tag: string): void {
-  storage.setSelectedTag(tag);
-}
-
