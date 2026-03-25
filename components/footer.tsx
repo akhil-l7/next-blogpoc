@@ -1,5 +1,5 @@
-import GithubIcon from './ui/github-icon'
 import { config } from '@/app.config'
+import GithubIcon from '@/components/ui/github-icon'
 
 export const Footer = () => {
     return (

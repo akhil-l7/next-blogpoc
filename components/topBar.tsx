@@ -1,6 +1,6 @@
+import { BLOG } from "@/lib/constants";
 import client from "@/lib/prismic";
 import Tags from "./tags";
-import { BLOG } from "@/lib/constants";
 
 
 export async function TopBar() {

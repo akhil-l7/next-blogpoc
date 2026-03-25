@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { getVisitorId } from "@/components/util";
 import { COMMENTS, HTTP_STATUS } from "@/lib/constants";
+import DOMPurify from "dompurify";
 import { Send } from "lucide-react";
 import { FormEvent, useState } from "react";
-import { getVisitorId } from "./util";
-import DOMPurify from "dompurify";
 
 interface CommentFormProps {
   slug: string;

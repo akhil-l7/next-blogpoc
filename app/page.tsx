@@ -1,6 +1,6 @@
-import dynamic from 'next/dynamic'
-import client from "@/lib/prismic";
 import { TopBar } from "@/components/topBar";
+import client from "@/lib/prismic";
+import dynamic from 'next/dynamic';
 
 const PostsList = dynamic(() => import('../components/PostsList').then(mod => mod.default), { loading: () => <p>Loading posts...</p> })
 

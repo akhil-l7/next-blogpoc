@@ -1,5 +1,5 @@
-import type { MetadataRoute } from 'next'
 import { config } from "@/app.config";
+import type { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
     const baseUrl = `https://${config.url}`;

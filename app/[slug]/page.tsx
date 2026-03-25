@@ -1,14 +1,14 @@
+import { config } from "@/app.config";
+import { Comments } from "@/components/comments";
 import { Content } from "@/components/content";
 import { PostHeader } from "@/components/postHeader";
-import { Comments } from "@/components/comments";
-import client from "@/lib/prismic";
-import { notFound } from "next/navigation";
-import { isFilled, NotFoundError } from "@prismicio/client";
-import NotFound from "./not-found";
-import { config } from "@/app.config";
-import { Metadata } from "next";
-import { truncate } from "@/lib/utils";
 import { BLOG } from "@/lib/constants";
+import client from "@/lib/prismic";
+import { truncate } from "@/lib/utils";
+import { isFilled, NotFoundError } from "@prismicio/client";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import NotFound from "./not-found";
 
 export async function generateStaticParams() {
   const data = await client.getAllByType('blog');

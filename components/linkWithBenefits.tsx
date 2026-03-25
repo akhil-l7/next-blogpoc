@@ -1,9 +1,9 @@
 'use client'
+import { sleep } from "@/components/util";
+import { TRANSITIONS } from "@/lib/constants";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ComponentProps, useEffect } from "react";
-import { sleep } from "./util";
-import { TRANSITIONS } from "@/lib/constants";
 
 
 interface LinkWithBenefitsProps extends ComponentProps<typeof Link> {

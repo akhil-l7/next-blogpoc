@@ -1,5 +1,5 @@
+import { getReadTime } from "@/components/util";
 import { asText, isFilled, RichTextField } from "@prismicio/client";
-import { getReadTime } from "../util";
 import { Clock } from "lucide-react";
 
 export function ReadTime({ content }: { content: RichTextField }) {

@@ -1,12 +1,11 @@
 import { config } from "@/app.config";
-import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { Separator } from "@/components/ui/separator";
+import { Header } from "@/components/header";
+import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ScrollToTop } from "@/components/ui/scroll-to-top";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

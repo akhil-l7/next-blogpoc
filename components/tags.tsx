@@ -1,8 +1,8 @@
 'use client'
-import { useRouter, usePathname, useSearchParams } from 'next/navigation'
+import { Badge } from "@/components/ui/badge"
+import { Separator } from "@/components/ui/separator"
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback } from 'react'
-import { Badge } from "./ui/badge"
-import { Separator } from "./ui/separator"
 
 interface TagsProps {
     tags: string[]

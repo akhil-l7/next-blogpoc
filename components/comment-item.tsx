@@ -1,7 +1,7 @@
 import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
+import { formatDate } from "@/components/util";
 import type { Comment } from "@/types/blog";
 import { Clock, User } from "lucide-react";
-import { formatDate } from "./util";
 
 interface CommentItemProps {
   comment: Comment;

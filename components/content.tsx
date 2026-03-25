@@ -1,5 +1,5 @@
 import { ImageField, isFilled, RichTextField } from "@prismicio/client";
-import { PrismicRichText, PrismicImage } from "@prismicio/react";
+import { PrismicImage, PrismicRichText } from "@prismicio/react";
 import Image from "next/image";
 
 interface BlogContentProps {

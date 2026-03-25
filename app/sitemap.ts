@@ -1,6 +1,6 @@
-import { MetadataRoute } from 'next';
-import client from '@/lib/prismic';
 import { config } from '@/app.config';
+import client from '@/lib/prismic';
+import { MetadataRoute } from 'next';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = `https://${config.url}`;

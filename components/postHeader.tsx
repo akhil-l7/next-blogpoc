@@ -1,11 +1,11 @@
+import { LinkWithBenefits } from "@/components/linkWithBenefits";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { asDate, DateField, isFilled, KeyTextField } from "@prismicio/client";
-import { ArrowLeft } from "lucide-react";
-import { LinkWithBenefits } from "./linkWithBenefits";
-import { Separator } from "./ui/separator";
+import { Separator } from "@/components/ui/separator";
 import { BLOG } from "@/lib/constants";
 import { truncate } from "@/lib/utils";
+import { asDate, DateField, isFilled, KeyTextField } from "@prismicio/client";
+import { ArrowLeft } from "lucide-react";
 
 interface BlogHeaderProps {
     category: string;
@@ -18,7 +18,7 @@ export const PostHeader = ({ category, title, dateField }: BlogHeaderProps) => {
     const dateString = publishedDate?.toLocaleDateString(undefined, { dateStyle: 'full' });
     const fullTitle = isFilled.keyText(title) ? title : '';
     const displayTitle = truncate(fullTitle, BLOG.MAX_TITLE_LENGTH);
-    
+
     return (
         <header className="space-y-10">
             <div className="flex flex-col gap-2">
@@ -37,23 +37,12 @@ export const PostHeader = ({ category, title, dateField }: BlogHeaderProps) => {
             </div>
 
             <div>
-                <h1 
+                <h1
                     className="text-foreground text-4xl leading-15 font-bold tracking-tight md:text-4xl lg:text-5xl"
                     title={fullTitle}
                 >
                     {displayTitle}
                 </h1>
-
-                {/* TODO: author */}
-                {/* <div className="flex flex-wrap items-center justify-between gap-4">
-                    <div className="flex items-center space-x-4">
-                        avatar
-                        <div>
-                            <p className="font-medium">&nbsp;by Admin</p>
-                            <p className="text-muted-foreground text-sm">{dateString}</p>
-                        </div>
-                    </div>
-                </div> */}
             </div>
         </header>
     );

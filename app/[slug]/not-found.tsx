@@ -1,5 +1,5 @@
-import { LinkWithBenefits } from '@/components/linkWithBenefits'
-import { Button } from '@/components/ui/button'
+import { LinkWithBenefits } from '@/components/linkWithBenefits';
+import { Button } from '@/components/ui/button';
 
 type NotFound = {
     errorMessage?: string;

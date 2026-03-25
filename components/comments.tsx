@@ -1,11 +1,11 @@
 import { Item, ItemContent, ItemDescription, ItemHeader, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { Separator } from "@/components/ui/separator";
+import { env, isDatabaseUrlConfigured } from "@/lib/env";
 import type { Comment } from "@/types/blog";
 import { neon } from "@neondatabase/serverless";
 import { MessageCircle } from "lucide-react";
 import { CommentForm } from "./comment-form";
 import { CommentList } from "./comment-list";
-import { env, isDatabaseUrlConfigured } from "@/lib/env";
 
 async function getComments(slug: string): Promise<Comment[]> {
   if (!isDatabaseUrlConfigured()) return [];

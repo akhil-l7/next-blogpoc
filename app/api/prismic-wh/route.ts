@@ -1,8 +1,8 @@
+import { env, isWebhookSecretConfigured } from '@/lib/env';
 import { PrismicPayload } from '@/types';
 import { timingSafeEqual } from 'crypto';
 import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
-import { env, isWebhookSecretConfigured } from '@/lib/env';
 
 export async function POST(req: NextRequest) {
     try {
