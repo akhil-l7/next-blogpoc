@@ -2,6 +2,10 @@ export const READING_TIME = {
   WORDS_PER_MINUTE: 200,
 } as const;
 
+export const TRANSITIONS = {
+  LINK_NAVIGATION_MS: 500,
+} as const;
+
 export const COMMENTS = {
   TABLE_NAME: 'public.comments',
   DEFAULT_NAME: 'Anonymous',

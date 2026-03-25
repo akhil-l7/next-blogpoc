@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ComponentProps, useEffect } from "react";
 import { sleep } from "./util";
+import { TRANSITIONS } from "@/lib/constants";
 
 
 interface LinkWithBenefitsProps extends ComponentProps<typeof Link> {
@@ -31,7 +32,7 @@ export function LinkWithBenefits({ children, href, prefetch = false, ...props }:
                 : headerTag.classList.add(TRANSITION_CLASS)
         }
 
-        await sleep(500);
+        await sleep(TRANSITIONS.LINK_NAVIGATION_MS);
         router.push(href);
     }
 
