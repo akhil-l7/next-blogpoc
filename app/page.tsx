@@ -23,10 +23,7 @@ export default async function Home() {
       <div id="__posts" className="grid md:grid-cols-2 gap-8 my-4 lg:my-8">
         {
           data?.map(({ data, id, tags }) => {
-            let tag = BLOG.PLACEHOLDER_BADGE as string;
-            if (tags.length !== 0) {
-              tag = tags[0];
-            }
+            const tag: string = tags?.[0] || BLOG.PLACEHOLDER_BADGE;
             return (
               <Item key={id} variant={"outline"} data-tag={tag}>
                 <ItemContent className="self-baseline">
