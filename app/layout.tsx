@@ -84,7 +84,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark min-h-dvh`}
         suppressHydrationWarning
       >
         <a
@@ -94,13 +94,11 @@ export default function RootLayout({
           Skip to main content
         </a>
         <Header title={config.title} />
-        <Separator />
         <main id="main-content" className="container max-w-5xl px-2 mx-auto overflow-hidden mb-8">
           <div className="content_container relative">
             {children}
           </div>
         </main>
-        <Separator />
         <Footer />
         <ScrollToTop />
         <SpeedInsights />

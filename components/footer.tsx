@@ -3,7 +3,7 @@ import { config } from '@/app.config'
 
 export const Footer = () => {
     return (
-        <footer className="container mx-auto my-2 md:my-6 flex flex-wrap justify-center items-center gap-4 px-2 lg:px-0 text-xs md:text-sm text-muted-foreground">
+        <footer className="py-2 md:py-6 flex flex-wrap justify-center items-center gap-4 px-2 lg:px-0 text-xs md:text-sm text-muted-foreground border-t">
             <span>&copy; 2026 BlogPOC.</span>
             <a
                 href={config.githubUrl}
