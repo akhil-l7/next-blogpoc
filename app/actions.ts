@@ -1,14 +1,14 @@
 'use server';
 
 import { COMMENTS, HTTP_STATUS } from '@/lib/constants';
+import { env, isDatabaseUrlConfigured } from '@/lib/env';
 import { neon } from '@neondatabase/serverless';
 import { revalidatePath } from 'next/cache';
 
 export async function submitComment(formData: FormData) {
   const { MAX_MESSAGE_LENGTH, MAX_NAME_LENGTH } = COMMENTS;
-  const db_url = process.env.DATABASE_URL;
 
-  if (!db_url) {
+  if (!isDatabaseUrlConfigured()) {
     return { error: 'Database URL not configured', status: HTTP_STATUS.INTERNAL_SERVER_ERROR };
   }
 
@@ -30,7 +30,7 @@ export async function submitComment(formData: FormData) {
       return { error: 'Name too long.', status: HTTP_STATUS.BAD_REQUEST };
     }
 
-    const sql = neon(db_url);
+    const sql = neon(env.databaseUrl);
 
     const existing = await sql`SELECT id FROM public.comments WHERE id = ${id}`;
 

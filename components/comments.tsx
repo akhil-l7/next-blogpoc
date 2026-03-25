@@ -5,13 +5,13 @@ import { neon } from "@neondatabase/serverless";
 import { MessageCircle } from "lucide-react";
 import { CommentForm } from "./comment-form";
 import { CommentList } from "./comment-list";
+import { env, isDatabaseUrlConfigured } from "@/lib/env";
 
 async function getComments(slug: string): Promise<Comment[]> {
-  const db_url = process.env.DATABASE_URL;
-  if (!db_url) return [];
+  if (!isDatabaseUrlConfigured()) return [];
 
   try {
-    const sql = neon(db_url);
+    const sql = neon(env.databaseUrl);
     const comments = await sql`SELECT * FROM public.comments WHERE "slug" = ${slug} ORDER BY "createdAt"`;
     return comments as Comment[];
   } catch (error) {

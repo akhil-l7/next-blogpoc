@@ -2,6 +2,7 @@ import { PrismicPayload } from '@/types';
 import { timingSafeEqual } from 'crypto';
 import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
+import { env, isWebhookSecretConfigured } from '@/lib/env';
 
 export async function POST(req: NextRequest) {
     try {
@@ -40,14 +41,13 @@ export async function POST(req: NextRequest) {
 }
 
 function verifySecret(payloadSecret: string): boolean {
-    const secret = process.env.PRISMIC_WEBHOOK_SECRET;
-    if (!secret) {
+    if (!isWebhookSecretConfigured()) {
         console.error('Webhook secret is not configured properly.');
         return false;
     }
     
     const bufferA = Buffer.from(payloadSecret);
-    const bufferB = Buffer.from(secret);
+    const bufferB = Buffer.from(env.prismicWebhookSecret);
 
     if (bufferA.length !== bufferB.length) return false;
 
