@@ -1,4 +1,4 @@
-interface blog {
+export interface Blog {
     id: string;
     name: string;
 }
@@ -9,5 +9,3 @@ export interface Comment {
     message: string;
     createdAt: string;
 }
-
-export default blog
