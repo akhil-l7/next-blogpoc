@@ -1,4 +1,5 @@
-import { READING_TIME, STORAGE_KEYS } from '@/lib/constants';
+import { READING_TIME } from '@/lib/constants';
+import { storage } from '@/lib/storage';
 
 export function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -47,23 +48,21 @@ export function getErrorText(status: number): string {
 }
 
 export function getVisitorId(): string {
-  let id = localStorage.getItem(STORAGE_KEYS.VISITOR_ID);
+  let id = storage.getVisitorId();
 
   if (!id) {
     id = crypto.randomUUID();
-    localStorage.setItem(STORAGE_KEYS.VISITOR_ID, id);
+    storage.setVisitorId(id);
   }
 
   return id;
 }
 
 export function getSelectedTagFromLocalStorage(): string | null {
-  const tag = localStorage.getItem(STORAGE_KEYS.TAG_KEY);
-  return tag;
+  return storage.getSelectedTag();
 }
 
-
 export function setSelectedTagToLocalStorage(tag: string): void {
-  localStorage.setItem(STORAGE_KEYS.TAG_KEY, tag);
+  storage.setSelectedTag(tag);
 }
 

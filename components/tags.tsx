@@ -1,9 +1,9 @@
 'use client'
-import { STORAGE_KEYS } from "@/lib/constants";
 import { useEffect, useState } from "react";
 import { Badge } from "./ui/badge";
 import { Separator } from "./ui/separator";
 import { getSelectedTagFromLocalStorage, setSelectedTagToLocalStorage } from "./util";
+import { storage } from "@/lib/storage";
 
 export function Tags({ tags }: { tags: string[] }) {
     const [selectedTag, setSelectedTag] = useState<string | null>(null);
@@ -30,7 +30,7 @@ export function Tags({ tags }: { tags: string[] }) {
             const post_tag = element.getAttribute('data-tag');
             if (reset) {
                 element.classList.remove("hidden");
-                localStorage.removeItem(STORAGE_KEYS.TAG_KEY);
+                storage.clearSelectedTag();
                 return;
             }
             element.classList.toggle("hidden", post_tag !== tag);
@@ -44,7 +44,7 @@ export function Tags({ tags }: { tags: string[] }) {
     }, []);
 
     function handleClear(): void {
-        localStorage.removeItem(STORAGE_KEYS.TAG_KEY);
+        storage.clearSelectedTag();
         setSelectedTag(null);
         hideAllButPostsWith('', true);
     }
