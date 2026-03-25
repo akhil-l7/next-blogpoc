@@ -1,6 +1,5 @@
 import { ItemGroup } from "@/components/ui/item";
 import type { Comment } from "@/types/blog";
-import React from "react";
 import { CommentItem } from "./comment-item";
 
 interface CommentListProps {
@@ -19,9 +18,7 @@ export function CommentList({ comments }: CommentListProps) {
   return (
     <ItemGroup className="gap-2">
       {comments.map((comment) => (
-        <React.Fragment key={comment.id}>
-          <CommentItem comment={comment} />
-        </React.Fragment>
+        <CommentItem key={comment.id} comment={comment} />
       ))}
     </ItemGroup>
   );
