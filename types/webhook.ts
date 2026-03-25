@@ -7,10 +7,10 @@ type BasePrismicPayload = {
 type ApiUpdatePayload = BasePrismicPayload & {
     type: 'api-update';
     masterRef?: string;
-    releases?: {};
-    masks?: {};
-    tags?: {};
-    experiments?: {};
+    releases?: object;
+    masks?: object;
+    tags?: object;
+    experiments?: object;
     documents: string[];
 };
 

@@ -14,7 +14,7 @@ export default function GlobalError({
             <div className='text-muted-foreground text-xl space-y-4'>
                 <h1 className='text-8xl'>oops...</h1>
                 <p className='text-lg'>An unexpected error occurred while loading this page.</p>
-                <Button variant={'outline'} onClick={__ => reset()} className='rounded-full cursor-pointer'>
+                <Button variant={'outline'} onClick={() => reset()} className='rounded-full cursor-pointer'>
                     Reload
                 </Button>
             </div>

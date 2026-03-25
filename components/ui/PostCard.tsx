@@ -3,9 +3,10 @@ import { Badge } from "@/components/ui/badge";
 import { Item, ItemContent, ItemDescription, ItemTitle } from "@/components/ui/item";
 import { ReadTime } from "@/components/ui/readTime";
 import { BLOG } from "@/lib/constants";
+import { BlogDocumentData } from "@/prismicio-types";
 
 interface BlogPost {
-    data: any;
+    data: BlogDocumentData;
     id: string;
     tags: string[];
 }

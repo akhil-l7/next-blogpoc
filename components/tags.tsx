@@ -23,7 +23,7 @@ export default function Tags({ tags }: TagsProps) {
             params.set('tag', tag);
         }
         router.push(`${pathname}?${params.toString()}`, { scroll: false })
-    }, [router, pathname, searchParams])
+    }, [router, pathname, searchParams, currentTag])
 
     return (
         <>

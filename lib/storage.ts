@@ -30,19 +30,4 @@ export const storage = {
         if (!isLocalStorageAvailable()) return null;
         return localStorage.getItem(STORAGE_KEYS.VISITOR_ID);
     },
-
-    setSelectedTag(tag: string): void {
-        if (!isLocalStorageAvailable()) return;
-        localStorage.setItem(STORAGE_KEYS.TAG_KEY, tag);
-    },
-
-    getSelectedTag(): string | null {
-        if (!isLocalStorageAvailable()) return null;
-        return localStorage.getItem(STORAGE_KEYS.TAG_KEY);
-    },
-
-    clearSelectedTag(): void {
-        if (!isLocalStorageAvailable()) return;
-        localStorage.removeItem(STORAGE_KEYS.TAG_KEY);
-    },
 };

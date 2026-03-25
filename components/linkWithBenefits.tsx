@@ -27,9 +27,8 @@ export function LinkWithBenefits({ children, href, prefetch = false, ...props }:
         if (mainTag) mainTag.classList.add(TRANSITION_CLASS);
 
         if (headerTag) {
-            toHome
-                ? headerTag.classList.remove(TRANSITION_CLASS)
-                : headerTag.classList.add(TRANSITION_CLASS)
+            if (toHome) headerTag.classList.remove(TRANSITION_CLASS);
+            else headerTag.classList.add(TRANSITION_CLASS);
         }
 
         await sleep(TRANSITIONS.LINK_NAVIGATION_MS);

@@ -82,7 +82,7 @@ export default async function blog({ params }: { params: Promise<{ slug: string 
     <div className="container mx-auto bg-background lg:px-6">
       {/* https://shadcnexamples.com/blog-detail-page  template */}
       <PostHeader
-        category={post.tags[0]}
+        category={post.tags[0] || BLOG.PLACEHOLDER_BADGE}
         dateField={post.data.published_date}
         title={post.data.title}
       />

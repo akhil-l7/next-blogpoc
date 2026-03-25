@@ -1,21 +1,12 @@
 'use client'
 import { Moon, Sun } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { sleep } from "../util";
 
 export function ColorSchemaToggle() {
     const [isDark, setIsDark] = useState(true);
     const [isAnimating, setIsAnimating] = useState(false);
     const label = isDark ? "Switch to light mode" : "Switch to dark mode";
-
-    useEffect(() => {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        if (!prefersDark) {
-            document.body.classList.remove('dark');
-            setIsDark(false);
-        }
-    }, []);
 
     async function toggleSchema(): Promise<void> {
         if (typeof document === 'undefined') return;
@@ -35,6 +26,14 @@ export function ColorSchemaToggle() {
         await sleep(1000);
         setIsAnimating(false);
     }
+    
+    // TODO: setState() directly within an effect
+    // useEffect(() => {
+    //     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    //     if (prefersDark === false && isDark) {
+    //         toggleSchema();
+    //     }
+    // }, []);
 
     return (
         <button type="button" title={label} aria-label={label} aria-pressed={isDark} data-isanimating={isAnimating} className="px-2 py-0.5 rounded-sm lg:p-2 lg:rounded-4xl cursor-pointer relative data-[isAnimating=true]:pointer-events-none select-none hover:bg-toggle-focus" onClick={toggleSchema}>
