@@ -1,9 +1,11 @@
 import { LinkWithBenefits } from "@/components/linkWithBenefits";
 import { Badge } from "@/components/ui/badge";
-import { Item, ItemContent, ItemDescription, ItemTitle } from "@/components/ui/item";
+import { Item, ItemContent, ItemDescription, ItemHeader, ItemTitle } from "@/components/ui/item";
 import { ReadTime } from "@/components/ui/readTime";
 import { BLOG } from "@/lib/constants";
 import { BlogDocumentData } from "@/prismicio-types";
+import { isFilled } from "@prismicio/client";
+import { PrismicImage } from "@prismicio/react";
 
 interface BlogPost {
     data: BlogDocumentData;
@@ -18,9 +20,15 @@ interface PostCardProps {
 export default function PostCard({ post }: PostCardProps) {
     const { data: postData, id, tags } = post;
     const postTag = tags[0] ?? BLOG.PLACEHOLDER_BADGE;
+    const coverImage = postData.featured_image;
+    const hasImage = isFilled.image(coverImage);
 
     return (
-        <Item key={id} variant={"outline"} data-tag={postTag}>
+        <Item key={id} variant={"outline"} data-tag={postTag} className="relative overflow-hidden group">
+            <ItemHeader className="absolute top-0 right-0 bottom-0 -z-1">
+                <div className="bg-linear-to-r from-background w-1/2 h-full absolute right-0"></div>
+                {hasImage && <PrismicImage field={coverImage} className="ml-auto h-dvw w-dvw max-h-40 max-w-1/2 object-cover" />}
+            </ItemHeader>
             <ItemContent className="self-baseline">
                 <ItemTitle>
                     <div className="flex flex-col">
