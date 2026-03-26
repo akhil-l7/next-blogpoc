@@ -12,7 +12,7 @@ export const Content = ({ content, coverImage }: BlogContentProps) => {
     return (
         <article className="space-y-8">
             {coverImage && (
-                <div className="bg-muted aspect-video w-full overflow-hidden rounded-xl">
+                <div className="bg-muted aspect-video w-full overflow-hidden rounded-xl max-h-[50dvh]">
                     {hasImage
                         ? (<PrismicImage field={coverImage} />)
                         : (<Image loading="lazy" src={'https://placehold.co/600x400/jpg?text=CoverImage'} height={400} width={600} alt="Cover Image" className="h-full w-full object-cover" />)

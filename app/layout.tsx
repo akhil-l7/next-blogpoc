@@ -93,7 +93,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         <Header title={config.title} />
-        <main id="main-content" className="container max-w-5xl px-2 mx-auto overflow-hidden mb-8">
+        <main id="main-content" className="container lg:max-w-4/5 px-2 mx-auto overflow-hidden mb-8">
           <div className="content_container relative">
             {children}
           </div>
