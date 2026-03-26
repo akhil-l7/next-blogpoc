@@ -2,8 +2,6 @@ import { LinkWithBenefits } from "@/components/linkWithBenefits";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { BLOG } from "@/lib/constants";
-import { truncate } from "@/lib/utils";
 import { asDate, DateField, isFilled, KeyTextField } from "@prismicio/client";
 import { ArrowLeft } from "lucide-react";
 
@@ -17,7 +15,6 @@ export const PostHeader = ({ category, title, dateField }: BlogHeaderProps) => {
     const publishedDate = asDate(dateField);
     const dateString = publishedDate?.toLocaleDateString(undefined, { dateStyle: 'full' });
     const fullTitle = isFilled.keyText(title) ? title : '';
-    const displayTitle = truncate(fullTitle, BLOG.MAX_TITLE_LENGTH);
 
     return (
         <header className="space-y-10">
@@ -41,7 +38,7 @@ export const PostHeader = ({ category, title, dateField }: BlogHeaderProps) => {
                     className="text-foreground text-4xl leading-15 font-bold tracking-tight md:text-4xl lg:text-5xl"
                     title={fullTitle}
                 >
-                    {displayTitle}
+                    {fullTitle}
                 </h1>
             </div>
         </header>
