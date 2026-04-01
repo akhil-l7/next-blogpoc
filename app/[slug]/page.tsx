@@ -9,6 +9,7 @@ import { isFilled, NotFoundError } from "@prismicio/client";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import NotFound from "./not-found";
+import { ViewTransition } from "react";
 
 export async function generateStaticParams() {
   const data = await client.getAllByType('blog');
@@ -79,21 +80,23 @@ export default async function blog({ params }: { params: Promise<{ slug: string 
     }
   }
   return (
-    <div className="mx-auto bg-background lg:px-6">
-      {/* https://shadcnexamples.com/blog-detail-page  template */}
-      <PostHeader
-        category={post.tags[0] || BLOG.PLACEHOLDER_BADGE}
-        dateField={post.data.published_date}
-        title={post.data.title}
-      />
-
-      <div className="mt-6">
-        <Content
-          content={post.data.content}
-          coverImage={post.data.featured_image}
+    <ViewTransition name={`${post.id}-item`}>
+      <div className="mx-auto bg-background lg:px-6">
+        {/* https://shadcnexamples.com/blog-detail-page  template */}
+        <PostHeader
+          category={post.tags[0] || BLOG.PLACEHOLDER_BADGE}
+          dateField={post.data.published_date}
+          title={post.data.title}
         />
+
+        <div className="mt-6">
+          <Content
+            content={post.data.content}
+            coverImage={post.data.featured_image}
+          />
+        </div>
+        <Comments slug={data?.slug || ''} />
       </div>
-      <Comments slug={data?.slug || ''} />
-    </div>
+    </ViewTransition>
   );
 }
