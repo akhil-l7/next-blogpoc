@@ -1,9 +1,9 @@
-import { LinkWithBenefits } from "@/components/linkWithBenefits";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { asDate, DateField, isFilled, KeyTextField } from "@prismicio/client";
 import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 interface BlogHeaderProps {
     category: string;
@@ -20,12 +20,12 @@ export const PostHeader = ({ category, title, dateField }: BlogHeaderProps) => {
         <header className="space-y-10">
             <div className="flex flex-col gap-2">
                 <div className="flex flex-wrap items-center gap-4 h-6">
-                    <LinkWithBenefits href={`/`}>
+                    <Link href={`/`}>
                         <Button variant="ghost" size="sm" className="gap-2">
                             <ArrowLeft className="h-4 w-4" />
                             <span className="not-sm:hidden">Home</span>
                         </Button>
-                    </LinkWithBenefits>
+                    </Link>
                     <Separator orientation="vertical" />
                     <Badge variant="outline" className="not-sm:hidden">{category || 'Placeholder'}</Badge>
                     <span className="ml-auto">{dateString}</span>

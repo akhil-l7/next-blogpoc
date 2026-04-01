@@ -1,4 +1,3 @@
-import { LinkWithBenefits } from "@/components/linkWithBenefits";
 import { Badge } from "@/components/ui/badge";
 import { Item, ItemContent, ItemDescription, ItemHeader, ItemTitle } from "@/components/ui/item";
 import { ReadTime } from "@/components/ui/readTime";
@@ -6,6 +5,7 @@ import { BLOG } from "@/lib/constants";
 import { BlogDocumentData } from "@/prismicio-types";
 import { isFilled } from "@prismicio/client";
 import { PrismicImage } from "@prismicio/react";
+import Link from "next/link";
 
 interface BlogPost {
     data: BlogDocumentData;
@@ -39,7 +39,7 @@ export default function PostCard({ post }: PostCardProps) {
                             <ReadTime content={postData.content} />
                         </div>
                         <h2 className="capitalize line-clamp-1 leading-normal text-balance text-4xl font-semibold tracking-tight first:mt-0">
-                            <LinkWithBenefits href={`/${id}`}>{postData?.title || 'Title'}</LinkWithBenefits>
+                            <Link href={`/${id}`}>{postData?.title || 'Title'}</Link>
                         </h2>
                     </div>
                 </ItemTitle>
